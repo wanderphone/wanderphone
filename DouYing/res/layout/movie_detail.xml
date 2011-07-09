@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:orientation="vertical"
+	android:layout_height="fill_parent" android:background="@drawable/main">
+	<include layout="@layout/titlebar" />
+	<RelativeLayout 
+			android:id="@+id/loading" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:visibility="invisible">
+			<LinearLayout android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:padding="8dip"
+				android:gravity="center">
+				<ProgressBar android:id="@+id/progress"
+					android:layout_width="24dip" android:layout_height="24dip"
+					android:layout_marginTop="6dip" android:layout_marginBottom="6dip"
+					android:indeterminate="true" 
+					style="@android:style/Widget.ProgressBar.Inverse"
+					/>
+
+				<TextView android:id="@+id/txt_loading" android:shadowDx="0"
+					android:shadowDy=".5" android:shadowRadius="1"
+					android:layout_toRightOf="@id/progress" android:layout_marginLeft="8dip"
+					android:text="@string/loading" android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:layout_alignParentTop="true" 
+					android:textColor="@color/black"/>
+			</LinearLayout>
+		</RelativeLayout>
+	<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/subject_view" android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:scrollbars="none"
+		android:layout_weight="1.0" android:cacheColorHint="#00000000">
+		<RelativeLayout android:layout_width="fill_parent"
+			android:layout_height="fill_parent" android:id="@+id/wrapper">
+			<LinearLayout android:orientation="horizontal"
+				android:id="@+id/wrapper" android:layout_height="fill_parent"
+				android:layout_width="fill_parent" android:background="@drawable/list_layer"
+				android:paddingBottom="5dip">
+				<ImageView android:id="@+id/movie_img"
+					android:layout_width="100dip" android:layout_height="140dip"
+					android:paddingLeft="7dip" android:paddingTop="5dip"
+					android:paddingBottom="5dip" />
+				<LinearLayout android:orientation="vertical"
+					android:paddingLeft="15dip" android:layout_height="wrap_content"
+					android:layout_width="fill_parent">
+					<!-- 电影 名称 评分 类型 导演 演员 时长 上映时间 -->
+					<TextView android:id="@+id/movie_rating"
+						android:layout_width="fill_parent" android:textSize="15dp"
+						android:textStyle="bold" android:layout_height="wrap_content"
+						android:textColor="@color/lightwhite" />
+					<TextView android:id="@+id/movie_type"
+						android:layout_width="fill_parent" android:textSize="15dp"
+						android:layout_height="wrap_content" android:textColor="@color/lightwhite" />
+					<TextView android:id="@+id/movie_director"
+						android:layout_width="fill_parent" android:textSize="15dp"
+						android:layout_height="wrap_content" android:textColor="@color/lightwhite" />
+					<TextView android:id="@+id/movie_cast"
+						android:layout_width="fill_parent" android:textSize="15dp"
+						android:layout_height="wrap_content" android:textColor="@color/lightwhite" />
+					<TextView android:id="@+id/movie_duration"
+						android:layout_width="fill_parent" android:textSize="15dp"
+						android:layout_height="wrap_content" android:textColor="@color/lightwhite" />
+					<TextView android:id="@+id/movie_pubdate"
+						android:layout_width="fill_parent" android:textSize="15dp"
+						android:layout_height="wrap_content" android:textColor="@color/lightwhite" />
+					<!-- end of 电影 名称 评分 类型 导演 演员 时长 上映时间 -->
+				</LinearLayout>
+			</LinearLayout>
+			<!-- android:id="@+id/wrapper" -->
+			<LinearLayout android:orientation="vertical" android:id="@+id/forth"
+				android:layout_below="@id/wrapper" android:layout_height="fill_parent"
+				android:layout_width="fill_parent" android:background="@drawable/movie_sum_1"
+				android:paddingTop="5dip" android:paddingLeft="5dip"
+				android:paddingRight="5dip" android:paddingBottom="5dip">
+				<RelativeLayout android:id="@+id/second"
+					android:layout_below="@id/forth" android:layout_height="wrap_content"
+					android:layout_width="wrap_content"
+					android:layout_centerHorizontal="true" android:layout_gravity="center_horizontal">
+					<Button android:text="@string/view_comment" android:id="@+id/view_comment"
+						android:layout_marginTop="5dip" android:visibility="visible"
+						android:textSize="18dp" android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:layout_marginRight="15dip"
+						android:layout_alignParentLeft="true" android:background="@drawable/button_selector"></Button>
+					<Button android:text="@string/view_cinema" android:id="@+id/view_cinema"
+						android:visibility="visible" android:textSize="18dp"
+						android:layout_centerHorizontal="true" android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:layout_toRightOf="@id/view_comment"
+						android:layout_alignTop="@id/view_comment" android:background="@drawable/button_selector"></Button>
+				</RelativeLayout>
+				<LinearLayout android:orientation="vertical"
+					android:id="@+id/third" android:layout_below="@id/second"
+					android:layout_height="fill_parent" android:layout_width="fill_parent">
+
+					<TextView android:id="@+id/movie_summary"
+						android:paddingTop="10dip" android:layout_width="fill_parent"
+						android:textSize="18dp" android:paddingBottom="10dip"
+						android:layout_height="fill_parent" android:textColor="@color/black" />
+				</LinearLayout>
+			</LinearLayout>
+		</RelativeLayout>
+
+	</ScrollView>
+
+</LinearLayout>
