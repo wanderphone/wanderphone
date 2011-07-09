@@ -1,0 +1,18 @@
+<project name="MineSweep Score Board Server" default="create-war" basedir="."> 
+
+  
+  <target name="create-war">
+      <war destfile="build/minesweep-server.war" >
+          <fileset dir="WebRoot"/>
+      </war>
+  </target>
+
+
+  <target name="clean">
+  	<delete>
+        <fileset dir="build"/>
+  	</delete>
+  </target>
+
+</project>
+
