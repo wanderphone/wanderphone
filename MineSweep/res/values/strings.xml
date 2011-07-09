@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">MineSweep</string>
+	<string name="bt_single">单机游戏</string>
+	<string name="bt_multiple">联机游戏</string>
+	<string name="bt_rank">最高纪录</string>
+	<string name="bt_help">帮          助</string>
+	<string name="bt_about">关          于</string>
+	<string name="bt_back">返回</string>
+	<string name="bt_next">下一页</string>
+	<string name="bt_front">上一页</string>
+	<string name="bt_quit">退          出</string>
+	<string name="bt_start">开始</string>
+	<string name="bt_show">蓝牙可见</string>
+	<string name="bt_connect">连接</string>
+	<string name="sounds_on">声音：开</string>
+	<string name="sounds_off">声音：关</string>
+	<string name="select_level">请选择难度</string>
+	<string name="select_easy">简单</string>
+	<string name="select_normal">中等</string>
+	<string name="select_hard">困难</string>
+	<string name="play_with_human">联机对战</string>
+	<string name="server">建立游戏</string>
+	<string name="client">加入游戏</string>
+	<string name="server_back">返回菜单</string>
+	<string name="ranking_tv">最高纪录</string>
+	<string name="help_title">单机游戏玩法</string>
+	<string name="help_title_two">联机游戏说明</string>
+	<string name="help_content">
+		* 扫雷游戏的目标就是尽快找到雷区中的所有地雷，而不允许踩到地雷。如果挖开的是地雷，您将输掉游戏。\n\n
+		* 通过单击即可挖开方块。如果挖开的是地雷，则您输掉游戏。\n\n
+		* 如果方块上出现数字，则表示在其周围的八个方块中共有多少颗地雷。\n\n
+		* 如果想要标记您认为可能有地雷的方块，请长按它。
+    </string>
+    <string name="help_content_two">
+    	*联机对战游戏的目标是发现地雷，单击方格，如果有地雷就会进行标记，可以继续行动；如果方格中没有地雷，即打开该空 格，不能继续行动，轮到对方行动。\n\n
+    	*联机游戏胜负判定：谁先挖到26颗雷，就获得胜利，另一方就失败。    								
+    </string>
+	<string name="bt_sure">确定</string>
+	<string name="about_title">关于我们</string>
+	<string name="about_detail">如果您在使用中遇到任何疑问或者问题，欢迎与我们联系，期待您的参与！</string>
+	<string name="connect_us">联系我们</string>
+	<string name="email">Email:app@androidcorn.com</string>
+	<string name="main_page">Official Website：</string>
+	<string name="waiting">waiting...</string>
+	<string name="no_connect">No Connect</string>
+	<string name="connecting">Connecting</string>
+	<string name="connected">Connected:</string>
+	<!--  DeviceListActivity -->
+    <string name="scanning">scanning for devices...</string>
+    <string name="select_device">select a device to connect</string>
+    <string name="none_paired">No devices have been paired</string>
+    <string name="none_found">No devices found</string>
+    <string name="title_paired_devices">Paired Devices</string>
+    <string name="title_other_devices">Other Available Devices</string>
+    <string name="button_scan">Scan for devices</string>
+    <string name="bt_not_enabled_leaving">Bluetooth was not enabled. Leaving Bluetooth Chat.</string>
+    <string name="dialog_title">"重要"</string>
+	<string name="username_prompt">"第一次游戏，给自己取个名字吧"</string>
+	<string name="prompt">"提示"</string>
+	<string name="register_success">"注册成功"</string>
+	<string name="loading">正在加载...</string>
+		<string name="about">关于我们</string>
+	<string name="intro">简介</string>
+	<string name="version">版本号：0.10</string>
+	<string name="designTitle">开发：</string>
+	<string name="teamName">豌豆风团队</string>
+	<string name="informationTitle">更多信息：</string>
+	<string name="informationWeb">http://www.wanderphone.com</string>
+	<string name="questionTitle">问题反馈：</string>
+	<string name="questionEmail">service@wanderphone.com</string>
+	<string name="attentionTitle">关注我们：</string>
+	<string name="sinaBlog">新浪微博：豌豆风</string>
+	<string name="qqBlog">腾讯微博：豌豆风</string>
+	<string name="developmentTitle">Development：</string>
+	<string name="teamEnglishName">Wanderphone Team</string>
+	<string name="moreInformationTitle">More Information：</string>
+	<string name="feedBack">Feedback：</string>
+</resources>

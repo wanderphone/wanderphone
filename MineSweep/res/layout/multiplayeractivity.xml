@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"  
+    android:background="@color/black"
+    android:gravity="center_horizontal"
+    >	
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"   
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    	<ImageButton android:id="@+id/Smiley"			
+			android:background="@drawable/ib_forward"
+			android:padding="5dip" 
+			android:layout_width="100dip"
+			android:layout_height="100dip"
+			android:layout_alignParentLeft="true"
+			android:layout_marginTop="20dip"/>
+			
+		<TextView
+			android:id="@+id/Timer"
+			android:layout_width="wrap_content"
+			android:layout_height="50dip"
+			android:layout_marginTop="20dip"
+			android:layout_toRightOf="@id/Smiley"
+			android:padding="5dip" 
+			android:textColor="#FFFFFF"
+			android:textSize="40sp"
+			android:text="00" />
+		<TextView
+			android:id="@+id/To"
+			android:layout_width="wrap_content"
+			android:layout_height="50dip"
+			android:layout_marginTop="15dip"
+			android:layout_toRightOf="@id/Timer"
+			
+			android:textColor="#FFFFFF"
+			android:textSize="40sp"
+			android:text=":" />
+		<TextView
+			android:id="@+id/Timer2"
+			android:layout_width="wrap_content"
+			android:layout_height="50dip"
+			android:layout_marginTop="20dip"
+			android:layout_toRightOf="@id/To"
+			android:padding="5dip" 
+			android:textColor="#FFFFFF"
+			android:textSize="40sp"
+			android:text="00" />
+		
+		<TextView
+			android:id="@+id/MineCount"
+			
+			android:layout_width="wrap_content"
+			android:layout_height="50dip"
+			android:layout_marginTop="20dip"
+			android:layout_alignParentRight="true"		
+			android:layout_marginRight="20dip"
+			android:padding="5dip" 
+			android:textColor="#FFFFFF"
+			android:textSize="40sp"
+			android:text="00" />
+
+</RelativeLayout>
+	<LinearLayout
+  	  android:orientation="vertical"
+  	  android:layout_width="wrap_content"
+   	  android:layout_height="wrap_content"  
+   	  android:background="@color/black"
+      android:gravity="center_vertical"> 
+	<com.ourdefineWidget.CustomScrollView
+			xmlns:android="http://schemas.android.com/apk/res/android"			
+			android:layout_width="fill_parent"  
+			android:layout_height="fill_parent" 
+			android:gravity="center"
+			android:layout_marginTop="30dip"
+			>
+		<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    		android:id="@+id/MineField"
+    		android:background="@color/black"
+    		android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"	    
+		    android:stretchColumns="*"
+		>
+		</TableLayout>		
+	</com.ourdefineWidget.CustomScrollView>
+	</LinearLayout>
+</LinearLayout>

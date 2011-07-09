@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="vertical" 
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:background="@drawable/mainback"
+		 >
+		<TextView 
+			android:id="@+id/help_title" 
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content" 
+			android:gravity="center_horizontal"
+			android:layout_marginTop="20dip" 
+			android:text="@string/help_title"
+			android:textColor="#CD2626"
+			android:textSize="25sp" />
+
+		<TextView 
+			android:id="@+id/help_content"
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content"
+			android:layout_below="@id/help_title" 
+			android:layout_marginTop="30dip"
+			android:layout_marginLeft="10dip" 
+			android:layout_marginRight="5dip"
+			android:text="@string/help_content" 
+			android:textColor="#FF7F00"
+			android:textSize="18sp" />
+
+	
+		<ImageButton
+			android:id="@+id/help_bt1"
+			android:layout_width="130dip"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:layout_alignParentLeft="true"
+			android:layout_marginLeft="10dip"
+			android:layout_marginBottom="15dip"
+			android:text="@string/bt_next"
+			android:textColor="#7D26CD"
+			android:background="@drawable/button_next_click"
+			/>
+		<ImageButton
+			android:id="@+id/help_bt2"
+			android:layout_width="130dip"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:layout_alignParentRight="true"
+			android:layout_marginRight="10dip"
+			android:layout_marginBottom="15dip"
+			android:text="@string/bt_back"
+			android:textColor="#7D26CD"
+			android:background="@drawable/back1_button"
+			/>
+
+	</RelativeLayout>
