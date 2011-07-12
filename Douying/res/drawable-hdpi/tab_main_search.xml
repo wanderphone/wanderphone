@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright (c) Mark Wyszomierski, 2010. -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:state_selected="true" android:drawable="@drawable/search" />
+	<item android:state_selected="false" android:drawable="@drawable/search" />
+</selector> 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:paddingTop="50dip">
+
+	<RelativeLayout android:paddingTop="4dip" android:id="@+id/mainRL"
+		android:layout_width="wrap_content" android:layout_height="wrap_content">
+		<ListView android:id="@android:id/list" android:layout_width="wrap_content"
+			android:layout_height="fill_parent" android:dividerHeight="2.0dip"
+			android:cacheColorHint="#00000000" android:divider="@color/lightwhite"
+			android:layout_weight="1.0" 
+			android:paddingTop="2dip"/>
+		<RelativeLayout android:layout_above="@id/mainRL"
+			android:id="@+id/loading" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:visibility="invisible">
+			<LinearLayout android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:padding="8dip"
+				android:gravity="center">
+				<ProgressBar android:id="@+id/progress"
+					android:layout_width="24dip" android:layout_height="24dip"
+					android:layout_marginTop="6dip" android:layout_marginBottom="6dip"
+					android:indeterminate="true" style="@android:style/Widget.ProgressBar.Inverse" />
+				<TextView android:id="@+id/txt_loading" android:shadowDx="0"
+					android:shadowDy=".5" android:shadowRadius="1"
+					android:layout_toRightOf="@id/progress" android:layout_marginLeft="8dip"
+					android:text="@string/loading" android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:layout_alignParentTop="true"
+					android:textColor="@color/black" />
+			</LinearLayout>
+
+		</RelativeLayout>
+	</RelativeLayout>
+</LinearLayout>
