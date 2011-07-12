@@ -1,0 +1,74 @@
+package com.android.douban_mtime_demo;
+
+import java.util.List;
+
+import android.app.ListActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.android.getxml.Movie_info;
+import com.android.getxml.movie_info_getxml;
+import com.android.myAdapter.my_adapter;
+
+
+
+public class newest_movie_list extends ListActivity{
+	
+	public Button search_button; 
+	public EditText search_editText; 
+	public my_adapter list_adapter;
+	public ListView listView;
+	public List<Movie_info> movie_info_list;
+	public TextView Tv;
+	Movie_info minfo;
+
+		@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		//TextView tv = new TextView(this);
+		//tv.setText("this is douban activity");
+		
+		setContentView(R.layout.newest_movie_list);
+		minfo = new Movie_info();
+		search_button = (Button) findViewById(R.id.search_button);
+		search_editText = (EditText) findViewById(R.id.search_edit);
+		
+		search_button.setOnClickListener(new Button.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String get_movie_name = search_editText.getText().toString();
+				try {
+					if (get_movie_name.trim().length()<1) {
+						Tv = (TextView) findViewById(R.id.textview);
+						Tv.setText("this is bad input");
+						return;
+					} else {
+						movie_info_list = new movie_info_getxml().find_xml(get_movie_name);
+						show_search_result();
+					}
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+		});
+
+	}
+	public void show_search_result(){
+		list_adapter = new my_adapter();
+		listView = getListView();// ListActivity 
+		listView.setVerticalScrollBarEnabled(false);// ListView
+		list_adapter = new my_adapter(newest_movie_list.this, listView, movie_info_list );
+		listView.setAdapter(list_adapter);
+		
+		//setListAdapter(new SubjectListAdapter(HomeActivity.this,getListView(), books));
+		
+	}
+}

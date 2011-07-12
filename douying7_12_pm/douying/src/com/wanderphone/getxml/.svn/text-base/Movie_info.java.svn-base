@@ -1,0 +1,39 @@
+package com.android.getxml;
+
+/**
+ * 
+ * @author Abel 2010-09-02
+ * 电影概要实体
+ *
+ */
+public class Movie_info {
+	private String director_name;//电影导演名称属性
+	private String movie_name;//电影名称属性
+	private String link_url;//链接属性
+	private String image_url;//图片链接属性
+	public String get_image_url() {
+		return image_url;
+	}
+	public void set_image_url(String imageUrl) {
+		this.image_url = imageUrl;
+	}
+	public String get_link_url() {
+		return link_url;
+	}
+	public void set_link_url(String firstUrl) {
+		this.link_url = firstUrl;
+	}
+	public String get_director_name() {
+		return director_name;
+	}
+	public void set_director_name(String authorName) {
+		this.director_name = authorName;
+	}
+	public String get_movie_name() {
+		return movie_name;
+	}
+	public void set_movie_name(String movieName) {
+		this.movie_name = movieName;
+	}
+
+}

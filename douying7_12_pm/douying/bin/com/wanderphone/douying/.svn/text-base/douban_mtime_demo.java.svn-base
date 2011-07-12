@@ -1,0 +1,38 @@
+package com.android.douban_mtime_demo;
+
+import android.app.TabActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.TabHost;
+
+/*
+ * 
+ * 程序入口
+ * */
+public class douban_mtime_demo extends TabActivity {
+    /** Called when the activity is first created. */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        TabHost tab_host = getTabHost();
+        TabHost.TabSpec spec;
+        Intent intent;  // Reusable Intent for each tab
+        
+  	  	//第一个TAB
+  	    intent = new Intent().setClass(this,newest_movie_list.class);//新建一个Intent用作Tab1显示的内容
+  	    spec = tab_host.newTabSpec("tab1");//新建一个 Tab
+  	    spec.setIndicator("douban");//设置名称以及图标
+  	    spec.setContent(intent);//设置显示的intent，这里的参数也可以是R.id.xxx
+  	    tab_host.addTab(spec);//添加进tabHost
+   
+  	    //第二个TAB
+  	    intent = new Intent().setClass(this,movie_in_cinema.class);//第二个Intent用作Tab1显示的内容
+  	    spec = tab_host.newTabSpec("tab2");//新建一个 Tab
+  	    spec.setIndicator("mtime");//设置名称以及图标
+  	    spec.setContent(intent);//设置显示的intent，这里的参数也可以是R.id.xxx
+  	    tab_host.addTab(spec);//添加进tabHost
+   
+  	    tab_host.setCurrentTab(0);
+    }
+}

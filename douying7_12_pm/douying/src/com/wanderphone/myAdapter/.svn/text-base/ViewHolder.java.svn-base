@@ -1,0 +1,19 @@
+package com.android.myAdapter;
+
+
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class ViewHolder {
+	public ImageView iv;// 适配器用到的图片控件
+	public TextView tv;// 适配器暂存导演+片名的文本控件
+	private View baseView;
+	public ViewHolder(View baseView){
+		this.baseView = baseView;
+	}
+	public ImageView getImageView() {
+		return iv;
+	}
+	
+}

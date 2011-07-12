@@ -1,0 +1,139 @@
+package com.android.myAdapter;
+
+import java.io.InputStream;
+import java.net.URL;
+import java.util.List;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.android.douban_mtime_demo.R;
+import com.android.getxml.Movie_info;
+
+
+
+public class my_adapter extends BaseAdapter{
+
+	private List<Movie_info> movie_info_list;
+	private LayoutInflater mInflater;
+	private ListView listView;
+	Movie_info minfo;
+	public my_adapter(Context context, ListView listView, List<Movie_info> movie_info_list) {
+		this.listView = listView;
+		this.movie_info_list = movie_info_list;
+		mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+	}
+	public my_adapter(){
+		
+	}
+	public int getCount() {
+		return movie_info_list.size();
+	}
+
+	public Object getItem(int i) {
+		return movie_info_list.get(i);
+	}
+
+	public long getItemId(int i) {
+		return i;
+	}
+
+/*
+ * public View getView(int i, View view, ViewGroup vg) {
+		ViewCache viewCache;
+		if (view == null) {
+			view = mInflater.inflate(R.layout.book_item, null);
+			viewCache = new ViewCache(view);
+			view.setTag(viewCache);
+		} else {
+			viewCache = (ViewCache) view.getTag();
+		}
+		Subject book = subjects.get(i);
+
+		TextView txtTitle = (TextView) view.findViewById(R.id.book_title);
+		txtTitle.setText(book.getTitle());
+
+		TextView txtDescription = (TextView) view
+				.findViewById(R.id.book_description);
+		txtDescription.setText(book.getDescription());
+
+		RatingBar ratingBar = (RatingBar) view.findViewById(R.id.ratingbar);
+		// 棣栭〉锛屾病鍙栧埌璇勫垎锛屽垯涓嶆樉绀篟atingBar
+		if (Math.abs(book.getRating() + 1) < 0.1) {
+			ratingBar.setVisibility(View.INVISIBLE);
+		} else {
+			ratingBar.setVisibility(View.VISIBLE);
+			ratingBar.setRating(book.getRating());
+		}
+
+		String imgUrl = book.getImgUrl();
+		ImageView imgBook = viewCache.getImageView();
+		imgBook.setTag(imgUrl);
+		Drawable drawable = NetUtil.asyncImageLoader.loadDrawable(imgUrl,
+				new ImageCallback() {
+					public void imageLoaded(Drawable imageDrawable,
+							String imageUrl) {
+						ImageView imageViewByTag = (ImageView) listView
+								.findViewWithTag(imageUrl);
+						if (imageViewByTag != null) {
+							imageViewByTag.setImageDrawable(imageDrawable);
+						}
+					}
+				});
+
+		if (drawable != null) {
+			imgBook.setImageDrawable(drawable);
+		} else {
+			imgBook.setImageResource(R.drawable.book);
+		}
+
+		return view;
+	}*/
+	public View getView(int position, View convertView, ViewGroup parent) {
+		ViewHolder viewCache;
+		if (convertView == null) {
+			convertView = mInflater.inflate(R.layout.show_search_result, null);
+			viewCache = new ViewHolder(convertView);
+			convertView.setTag(viewCache);
+		} else {
+			viewCache = (ViewHolder) convertView.getTag();
+		}
+		
+		/*convertView = LayoutInflater.from(getApplicationContext()).inflate(
+				R.layout.show_search_result, null);
+		*/
+		//ViewHolder vh = new ViewHolder();// 行内容类型多 需要一个Object类型封装下,给
+											// settag(),传给convertView的必须是OBJECT类型
+		viewCache.iv = (ImageView) convertView.findViewById(R.id.allimageview);
+		viewCache.tv = (TextView) convertView.findViewById(R.id.allname);
+		convertView.setTag(viewCache);
+//		mbp = aList.get(position);
+		minfo = movie_info_list.get(position);
+
+		try {
+			URL aryURI = new URL(minfo.get_image_url());
+			InputStream is = aryURI.openStream();
+			Bitmap bm = BitmapFactory.decodeStream(is);
+			is.close();
+			viewCache.iv.setImageBitmap(bm);
+			viewCache.tv.setText("影片:" + minfo.get_movie_name() + "\n导演:"
+					+ minfo.get_director_name());
+			viewCache.tv.setTextColor(Color.WHITE);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return convertView;
+	}
+}
+

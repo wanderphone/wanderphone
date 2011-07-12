@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+	<LinearLayout android:gravity="center_vertical"
+		android:orientation="horizontal" android:id="@+id/title_bar"
+		android:layout_width="fill_parent"
+		android:layout_height="30dip"
+		android:background = "@drawable/titlebar">
+		
+		<!-- <LinearLayout android:gravity="center_vertical"
+			android:layout_width="0.0dip" android:layout_height="wrap_content"
+			android:layout_weight="1.0"> -->
+			<TextView android:textSize="16.0sp" 
+				android:textStyle="bold"
+				android:id="@+id/myTitle" android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:layout_marginLeft="5.0dip"
+				android:textColor="@color/dark"
+				/>
+	</LinearLayout>
+</merge>
