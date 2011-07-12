@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/tt">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+<TextView 
+			android:id="@+id/help_title" 
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content" 
+			android:gravity="center_horizontal"
+			android:layout_marginTop="20dip" 
+			android:text="@string/string54"
+			android:textColor="#000000"
+			android:textSize="30sp" />
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:layout_marginTop="20dip" 
+    android:text="@string/string65"
+    android:textColor="#000000"
+	android:textSize="18sp"
+    />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+<TextView  
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    
+    android:text="@string/string66"
+    android:textColor="#000000"
+	android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="@string/string67"
+   
+    android:autoLink="all"
+    android:textColor="#000000"
+	android:textSize="18sp"
+    />
+</LinearLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+		
+<TextView  
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    
+    android:text="@string/string68"
+    android:textColor="#000000"
+	android:textSize="18sp"
+    />
+<TextView  
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+   
+    android:text="@string/string69"
+    android:autoLink="all"
+    android:textColor="#000000"
+	android:textSize="18sp"
+    />
+</LinearLayout>
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+   
+    android:text="@string/string70"
+    android:textColor="#000000"
+	android:textSize="18sp"
+    />
+
+</LinearLayout>
+
+	
+</RelativeLayout>
