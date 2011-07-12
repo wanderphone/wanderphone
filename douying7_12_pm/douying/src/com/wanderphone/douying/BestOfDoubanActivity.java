@@ -112,7 +112,7 @@ public class BestOfDoubanActivity extends BaseListActivity {
 				saveData();
 			} else {
 				Toast.makeText(BestOfDoubanActivity.this, "数据加载失败！",
-						Toast.LENGTH_LONG).show();
+						Toast.LENGTH_SHORT).show();
 				flag = false;
 				if (db_adapter.if_best_exists()) {
 					addListHeaderView();

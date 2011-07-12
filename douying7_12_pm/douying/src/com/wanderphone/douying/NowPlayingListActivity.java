@@ -155,7 +155,7 @@ public class NowPlayingListActivity extends BaseListActivity {
 				saveData();
 			} else {
 				Toast.makeText(NowPlayingListActivity.this, "数据加载失败！",
-						Toast.LENGTH_LONG).show();
+						Toast.LENGTH_SHORT).show();
 				flag = false;
 				if (db_adapter.if_np_exists()) {
 					addListHeaderView();

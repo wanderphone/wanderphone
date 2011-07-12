@@ -143,12 +143,12 @@ public class ViewCommentActivity extends BaseListActivity {
 
 					if (reviews.size() == 0) {
 						Toast.makeText(ViewCommentActivity.this, "没有找到相关评论！",
-								Toast.LENGTH_LONG).show();
+								Toast.LENGTH_SHORT).show();
 					}
 
 				} else {
 					Toast.makeText(ViewCommentActivity.this, "数据加载失败！",
-							Toast.LENGTH_LONG).show();
+							Toast.LENGTH_SHORT).show();
 				}
 				isFilling = false;
 			}
