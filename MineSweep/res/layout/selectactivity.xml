@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/back22"
+    >
+<TextView
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:layout_marginTop="20dip"
+    android:text="@string/select_level"
+    android:textColor="#CD2626"
+    android:textSize="25sp"
+    />
+<ImageButton
+	android:id="@+id/select_bt1"
+	android:layout_width="180dip"
+	android:layout_height="45dip"
+	android:layout_gravity="center_horizontal"
+	android:layout_marginTop="20dip"
+	android:text="@string/select_easy"
+	android:textSize="20sp"
+	android:textColor="#7D26CD" 
+	android:background="@drawable/easy_button"
+	/>
+<ImageButton
+	android:id="@+id/select_bt2"
+	android:layout_width="180dip"
+	android:layout_height="40dip"
+	android:layout_gravity="center_horizontal"
+	android:layout_marginTop="10dip"
+	android:text="@string/select_normal"
+	android:textSize="20sp"
+	android:textColor="#7D26CD" 
+	android:background="@drawable/normal_button"
+	/>
+<ImageButton
+	android:id="@+id/select_bt3"
+	android:layout_width="180dip"
+	android:layout_height="40dip"
+	android:layout_gravity="center_horizontal"
+	android:layout_marginTop="10dip"
+	android:text="@string/select_hard"
+	android:textSize="20sp"
+	android:textColor="#7D26CD" 
+	android:background="@drawable/hard_button"
+	/>
+</LinearLayout>    
