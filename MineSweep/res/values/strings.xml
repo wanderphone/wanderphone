@@ -87,4 +87,8 @@
 	<string name="loading_rank">正在加载排行数据...</string>
 	<string name="bt_cancel">取消</string>
 	<string name="dialog_sure_quit">确认退出扫雷</string>
+	<string name="sound_on">sound:on</string>
+	<string name="sound_off">sound:off</string>
+	<string name="vibrate_on">vibrate:on</string>
+	<string name="vibrate_off">vibrate:off</string>
 </resources>
