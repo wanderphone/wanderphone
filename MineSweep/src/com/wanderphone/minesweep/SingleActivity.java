@@ -125,6 +125,10 @@ public class SingleActivity extends Activity {
         loadSfx(R.raw.sound1,123);
 
 		btnSmile = (ImageButton) findViewById(R.id.Smiley);
+		mineField = (TableLayout) findViewById(R.id.MineField);
+
+		endExistingGame();
+		startNewGame();
 		btnSmile.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -133,7 +137,6 @@ public class SingleActivity extends Activity {
 			}
 		});
 
-		mineField = (TableLayout) findViewById(R.id.MineField);
 	}
 	//menu菜单
 	public boolean onCreateOptionsMenu(Menu menu) 
@@ -669,7 +672,7 @@ public class SingleActivity extends Activity {
 						}
 					}
 				}else{
-					Toast.makeText(SingleActivity.this, "网络数据加载失败", Toast.LENGTH_LONG)
+					Toast.makeText(SingleActivity.this, "Congratulations!", Toast.LENGTH_SHORT)
 								.show();
 				}
 			}

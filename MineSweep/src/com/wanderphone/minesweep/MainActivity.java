@@ -45,7 +45,6 @@ public class MainActivity extends Activity {
 		bt_rank = (ImageButton) findViewById(R.id.bt_rank);
 		bt_help = (ImageButton) findViewById(R.id.bt_help);
 		bt_about = (ImageButton) findViewById(R.id.bt_about);
-		bt_quit = (ImageButton) findViewById(R.id.bt_quit);
 		
 	}
 
@@ -55,13 +54,11 @@ public class MainActivity extends Activity {
 		bt_rank.setOnClickListener(cal_rank);
 		bt_help.setOnClickListener(cal_help);
 		bt_about.setOnClickListener(cal_about);
-		bt_quit.setOnClickListener(cal_quit);
 		bt_single.getBackground().setColorFilter(0xFFEEEE00, PorterDuff.Mode.MULTIPLY);
 		bt_multiple.getBackground().setColorFilter(0xFFEEEE00, PorterDuff.Mode.MULTIPLY);
 		bt_rank.getBackground().setColorFilter(0xFFEEEE00, PorterDuff.Mode.MULTIPLY);
 		bt_help.getBackground().setColorFilter(0xFFEEEE00, PorterDuff.Mode.MULTIPLY);
 		bt_about.getBackground().setColorFilter(0xFFEEEE00, PorterDuff.Mode.MULTIPLY);
-		bt_quit.getBackground().setColorFilter(0xFFEEEE00, PorterDuff.Mode.MULTIPLY);
 	}
 
 	
@@ -122,16 +119,6 @@ public class MainActivity extends Activity {
 			Intent intent = new Intent();
 			intent.setClass(MainActivity.this, AboutActivity.class);
 			startActivity(intent);
-		}
-
-	};
-	// 退出按钮监听
-	private ImageButton.OnClickListener cal_quit = new ImageButton.OnClickListener() {
-
-		@Override
-		public void onClick(View arg0) {
-			// TODO Auto-generated method stub
-			doExit();
 		}
 
 	};
