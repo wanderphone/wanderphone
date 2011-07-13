@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
 	private ImageButton bt_rank;
 	private ImageButton bt_help;
 	private ImageButton bt_about;
-	private ImageButton bt_quit;
+
 	
 
 	@Override
