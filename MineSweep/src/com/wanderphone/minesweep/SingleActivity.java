@@ -1,23 +1,32 @@
 package com.wanderphone.minesweep;
 
+import java.util.HashMap;
+
 import java.util.Random;
 import java.util.UUID;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Typeface;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -42,10 +51,24 @@ public class SingleActivity extends Activity {
 	private TextView txtMineCount;
 	private TextView txtTimer;
 	private ImageButton btnSmile;
-
+	private Boolean soundflag;
+	private Boolean vibrateflag;
+	//震动
+	static Vibrator vibrator;
+	//音效的音量   
+	static int streamVolume;     
+	//定义SoundPool 对象   
+	private static SoundPool soundPool;    	  
+	//定义HASH表   
+	private static HashMap<Integer, Integer> soundPoolMap;  
 	// 数据库相关操作
 	private ToDoDB myToDoDB;
-
+	// MENU菜单相关
+	int menuItemOrder = Menu.NONE; 	 
+	int MENU_SOUND=Menu.FIRST;
+	int MENU_VIBRATOR=Menu.FIRST + 1;
+	int groupId = 0;
+	
 	private TableLayout mineField; // table layout to add mines to
 
 	private Block blocks[][]; // blocks for mine field
@@ -75,7 +98,13 @@ public class SingleActivity extends Activity {
 		setContentView(R.layout.singleactivity);
 		// 数据库相关
 		myToDoDB = new ToDoDB(this);
-
+		//震动
+		vibrator=(Vibrator)getApplication().getSystemService(Service.VIBRATOR_SERVICE);
+		//震动和音效标记；
+		SharedPreferences sharedPreferences1=getSharedPreferences("the_flag",MODE_PRIVATE);        
+        soundflag=sharedPreferences1.getBoolean("soundflag", true);
+		SharedPreferences sharedPreferences2=getSharedPreferences("the_flag",MODE_PRIVATE);        
+        vibrateflag=sharedPreferences2.getBoolean("vibtateflag", true);
 		// 修改部分，获取难度
 		Bundle bundle = this.getIntent().getExtras();
 		numberOfRowsInMineField = bundle.getInt("numberOfRowsInMineField");
@@ -91,6 +120,9 @@ public class SingleActivity extends Activity {
 				"fonts/lcd2mono.ttf");
 		txtMineCount.setTypeface(lcdFont);
 		txtTimer.setTypeface(lcdFont);
+		//音效相关初始化
+		initSounds();
+        loadSfx(R.raw.sound1,123);
 
 		btnSmile = (ImageButton) findViewById(R.id.Smiley);
 		btnSmile.setOnClickListener(new OnClickListener() {
@@ -103,6 +135,110 @@ public class SingleActivity extends Activity {
 
 		mineField = (TableLayout) findViewById(R.id.MineField);
 	}
+	//menu菜单
+	public boolean onCreateOptionsMenu(Menu menu) 
+	{
+		if(soundflag)
+		{
+			menu.add(groupId, MENU_SOUND, menuItemOrder, R.string.sound_on)
+			.setIcon(android.R.drawable.ic_lock_silent_mode_off); 	
+		}
+		else
+		{
+			menu.add(groupId, MENU_SOUND, menuItemOrder, R.string.sound_off)
+			.setIcon(android.R.drawable.ic_lock_silent_mode); 	
+		}
+		if(vibrateflag)
+		{
+			menu.add(groupId, MENU_VIBRATOR, menuItemOrder, R.string.vibrate_on)
+			.setIcon(android.R.drawable.btn_star_big_on); 
+		}
+		else
+		{
+			menu.add(groupId, MENU_VIBRATOR, menuItemOrder, R.string.vibrate_off)
+			.setIcon(android.R.drawable.btn_star_big_off); 
+		}
+		
+
+    	return true;     	
+    } 
+	public boolean onOptionsItemSelected(MenuItem item) 
+    {
+		final int id=item.getItemId();   
+    	if(id==MENU_SOUND)
+    	{
+    		if(soundflag)
+    		{
+    			soundflag=false;
+    			item.setIcon(android.R.drawable.ic_lock_silent_mode);
+    			item.setTitle(R.string.sound_off);
+    		}
+    		else
+    		{
+    			soundflag=true;
+    			item.setIcon(android.R.drawable.ic_lock_silent_mode_off);
+    			item.setTitle(R.string.sound_on);
+    		}
+    	}
+    	else if(id==MENU_VIBRATOR)
+    	{
+    		if(vibrateflag)
+    		{
+    			vibrateflag=false;
+    			item.setIcon(android.R.drawable.btn_star_big_off);
+    			item.setTitle(R.string.vibrate_off);
+    		}
+    		else
+    		{
+    			vibrateflag=true;
+    			item.setIcon(android.R.drawable.btn_star_big_on);
+    			item.setTitle(R.string.vibrate_on);
+    		}
+    	}
+    	  
+		return true; 
+    }
+	/***************************************************************  
+	  * Function:     initSounds();  
+	  * Parameters:   null  
+	  * Returns:      None.  
+	  * Description:  初始化声音系统  
+	  * Notes:        none.  
+	  ***************************************************************/  
+	  public void initSounds() {    
+	       //初始化soundPool 对象,第一个参数是允许有多少个声音流同时播放,第2个参数是声音类型,第三个参数是声音的品质   
+	      soundPool = new SoundPool(100, AudioManager.STREAM_MUSIC, 100);    
+	  
+	      //初始化HASH表   
+	      soundPoolMap = new HashMap<Integer, Integer>();    
+	          
+	      //获得声音设备和设备音量   
+	      AudioManager mgr = (AudioManager)getSystemService(Context.AUDIO_SERVICE);   
+	      streamVolume = mgr.getStreamVolume(AudioManager.STREAM_MUSIC);   
+	  }  
+	  /***************************************************************  
+	   * Function:     loadSfx();  
+	   * Parameters:   null  
+	   * Returns:      None.  
+	   * Description:  加载音效资源  
+	   * Notes:        none.  
+	   ***************************************************************/  
+	   public void loadSfx(int raw, int ID) {   
+	    //把资源中的音效加载到指定的ID(播放的时候就对应到这个ID播放就行了)   
+	    soundPoolMap.put(ID, soundPool.load(SingleActivity.this, raw, ID));    
+	   }       
+	   
+	   /***************************************************************  
+	    * Function:     play();  
+	    * Parameters:   sound:要播放的音效的ID, loop:循环次数  
+	  * Returns:      None.  
+	    * Description:  播放声音  
+	    * Notes:        none.  
+	    ***************************************************************/  
+	    public static void play(int sound, int uLoop) {  
+	    
+	      soundPool.play(soundPoolMap.get(sound), streamVolume, streamVolume, 1, uLoop, 1f);    
+	    }  
 
 	private void startNewGame() {
 		// plant mines and do rest of the calculations
@@ -209,6 +345,18 @@ public class SingleActivity extends Activity {
 							// did we clicked a mine
 							if (blocks[currentRow][currentColumn].hasMine()) {
 								// Oops, game over
+								//爆炸音效
+								if(soundflag)
+								{
+									play(123, 0);
+								}
+								//震动
+								else if(vibrateflag)
+								{									
+									long[] pattern = {50,180,}; // OFF/ON/OFF/ON...								
+							        vibrator.vibrate(pattern, -1);
+								}
+								
 								finishGame(currentRow, currentColumn);
 							}
 
