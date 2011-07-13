@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.media.AudioManager;
@@ -51,6 +52,8 @@ public class SingleActivity extends Activity {
 	private TextView txtMineCount;
 	private TextView txtTimer;
 	private ImageButton btnSmile;
+	private SharedPreferences sharedPreferences1;
+	private SharedPreferences sharedPreferences2;
 	private Boolean soundflag;
 	private Boolean vibrateflag;
 	//震动
@@ -101,10 +104,10 @@ public class SingleActivity extends Activity {
 		//震动
 		vibrator=(Vibrator)getApplication().getSystemService(Service.VIBRATOR_SERVICE);
 		//震动和音效标记；
-		SharedPreferences sharedPreferences1=getSharedPreferences("the_flag",MODE_PRIVATE);        
+		sharedPreferences1=getSharedPreferences("the_soundflag",MODE_PRIVATE);        
         soundflag=sharedPreferences1.getBoolean("soundflag", true);
-		SharedPreferences sharedPreferences2=getSharedPreferences("the_flag",MODE_PRIVATE);        
-        vibrateflag=sharedPreferences2.getBoolean("vibtateflag", true);
+		sharedPreferences2=getSharedPreferences("the_vibtateflag",MODE_PRIVATE);        
+        vibrateflag=sharedPreferences2.getBoolean("vibrateflag", true);
 		// 修改部分，获取难度
 		Bundle bundle = this.getIntent().getExtras();
 		numberOfRowsInMineField = bundle.getInt("numberOfRowsInMineField");
@@ -172,12 +175,18 @@ public class SingleActivity extends Activity {
     			soundflag=false;
     			item.setIcon(android.R.drawable.ic_lock_silent_mode);
     			item.setTitle(R.string.sound_off);
+    			Editor editor=sharedPreferences1.edit();
+      		    editor.putBoolean("soundflag", false);
+      		    editor.commit();
     		}
     		else
     		{
     			soundflag=true;
     			item.setIcon(android.R.drawable.ic_lock_silent_mode_off);
     			item.setTitle(R.string.sound_on);
+    			Editor editor=sharedPreferences1.edit();
+      		    editor.putBoolean("soundflag", true);
+      		    editor.commit();
     		}
     	}
     	else if(id==MENU_VIBRATOR)
@@ -187,12 +196,18 @@ public class SingleActivity extends Activity {
     			vibrateflag=false;
     			item.setIcon(android.R.drawable.btn_star_big_off);
     			item.setTitle(R.string.vibrate_off);
+    			Editor editor=sharedPreferences2.edit();
+      		    editor.putBoolean("vibrateflag", false);
+      		    editor.commit();
     		}
     		else
     		{
     			vibrateflag=true;
     			item.setIcon(android.R.drawable.btn_star_big_on);
     			item.setTitle(R.string.vibrate_on);
+    			Editor editor=sharedPreferences2.edit();
+      		    editor.putBoolean("vibrateflag", true);
+      		    editor.commit();
     		}
     	}
     	  
@@ -350,12 +365,20 @@ public class SingleActivity extends Activity {
 								{
 									play(123, 0);
 								}
+								else
+								{
+									
+								}
 								//震动
-								else if(vibrateflag)
+							    if(vibrateflag)
 								{									
 									long[] pattern = {50,180,}; // OFF/ON/OFF/ON...								
 							        vibrator.vibrate(pattern, -1);
 								}
+							    else
+							    {
+							    	
+							    }
 								
 								finishGame(currentRow, currentColumn);
 							}
