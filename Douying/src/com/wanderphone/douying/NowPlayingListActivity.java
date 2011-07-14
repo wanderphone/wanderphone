@@ -60,6 +60,7 @@ public class NowPlayingListActivity extends BaseListActivity {
 			movies = db_adapter.loadNpData();
 			setListAdapter(new NowPlayingListAdapter(
 					NowPlayingListActivity.this, getListView(), movies));
+			flag = false;
 			showListAsyncTask();
 		} else if (!isExists && isConnecting) {
 			showListAsyncTask();
@@ -96,7 +97,7 @@ public class NowPlayingListActivity extends BaseListActivity {
 					showListAsyncTask();
 				} else if (!flag && position != 0 && isConnecting()) {
 					Toast.makeText(NowPlayingListActivity.this,
-							getResources().getString(R.string.load_failed),
+							getResources().getString(R.string.load_info),
 							Toast.LENGTH_SHORT).show();
 				} else if (!flag && position != 0 && !isConnecting()) {
 					Toast.makeText(NowPlayingListActivity.this,

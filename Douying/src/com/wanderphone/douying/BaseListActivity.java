@@ -34,6 +34,7 @@ public class BaseListActivity extends ListActivity {
 	public void setDoubanService(DoubanService doubanService) {
 		this.doubanService = doubanService;
 	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -43,13 +44,15 @@ public class BaseListActivity extends ListActivity {
 		String uid = sharedata.getString("uid", null);
 		doubanService.setAccessToken(accessToken, tokenSecret);
 		NetUtil.setUid(uid);
-		 MobclickAgent.onResume(this);
+		MobclickAgent.onResume(this);
 
 	}
+
 	public void onPause() {
-		  super.onPause();
-		  MobclickAgent.onPause(this);
-		}
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
 	// 退出
 	protected void doExit() {
 		new AlertDialog.Builder(BaseListActivity.this)
@@ -67,11 +70,10 @@ public class BaseListActivity extends ListActivity {
 				}).show();
 
 	}
+
 	public boolean isConnecting() {
 		ConnectivityManager mConnectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		TelephonyManager mTelephony = (TelephonyManager) this
-				.getSystemService(TELEPHONY_SERVICE);
-
+		
 		NetworkInfo info = mConnectivity.getActiveNetworkInfo();
 
 		if (info == null || !mConnectivity.getBackgroundDataSetting()) {
@@ -79,13 +81,10 @@ public class BaseListActivity extends ListActivity {
 		}
 
 		int netType = info.getType();
-		int netSubtype = info.getSubtype();
 
 		if (netType == ConnectivityManager.TYPE_WIFI) {
 			return info.isConnected();
-		} else if (netType == ConnectivityManager.TYPE_MOBILE
-				&& netSubtype == TelephonyManager.NETWORK_TYPE_UMTS
-				&& !mTelephony.isNetworkRoaming()) {
+		} else if (netType == ConnectivityManager.TYPE_MOBILE) {
 			return info.isConnected();
 		} else {
 			return false;
@@ -134,33 +133,31 @@ public class BaseListActivity extends ListActivity {
 
 		loading.setVisibility(View.INVISIBLE);
 	}
-	
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		menu.add(0, 0, 0, R.string.app_feedback).setIcon(android.R.drawable.ic_menu_send);
-		menu.add(0, 1, 1, R.string.app_about).setIcon(android.R.drawable.ic_menu_info_details);
+
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(0, 0, 0, R.string.app_feedback).setIcon(
+				android.R.drawable.ic_menu_send);
+		menu.add(0, 1, 1, R.string.app_about).setIcon(
+				android.R.drawable.ic_menu_info_details);
 
 		return super.onCreateOptionsMenu(menu);
 	}
-	
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
+
+	public boolean onOptionsItemSelected(MenuItem item) {
 		super.onOptionsItemSelected(item);
-		
-		switch(item.getItemId())
-		{
-			case 0:
-				MobclickAgent.openFeedbackActivity(this);
-				break;
-			case 1:
-				Intent intent = new Intent();
-				intent.setClass(BaseListActivity.this, About.class);
-				startActivity(intent);
-				break;
+
+		switch (item.getItemId()) {
+		case 0:
+			MobclickAgent.openFeedbackActivity(this);
+			break;
+		case 1:
+			Intent intent = new Intent();
+			intent.setClass(BaseListActivity.this, About.class);
+			startActivity(intent);
+			break;
 		}
-		
+
 		return true;
 	}
-	
-	
+
 }

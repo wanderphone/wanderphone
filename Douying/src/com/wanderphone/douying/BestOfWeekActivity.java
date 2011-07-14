@@ -57,6 +57,7 @@ public class BestOfWeekActivity extends BaseListActivity {
 			movies = db_adapter.loadWeekData();
 			setListAdapter(new MovieListAdapter(BestOfWeekActivity.this,
 					getListView(), movies));
+			flag = false;
 			showListAsyncTask();
 		} else if (!isExists && isConnecting) {
 			showListAsyncTask();
@@ -97,7 +98,7 @@ public class BestOfWeekActivity extends BaseListActivity {
 						showListAsyncTask();
 					} else if (!flag && position != 0 && isConnecting()) {
 						Toast.makeText(BestOfWeekActivity.this,
-								getResources().getString(R.string.load_failed),
+								getResources().getString(R.string.load_info),
 								Toast.LENGTH_SHORT).show();
 
 					} else if (!flag && position != 0 && !isConnecting()) {

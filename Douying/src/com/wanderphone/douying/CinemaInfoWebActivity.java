@@ -52,8 +52,8 @@ public class CinemaInfoWebActivity extends BaseActivity {
 		webSettings.setBuiltInZoomControls(true);
 		mWebView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
 
-		progressBar = ProgressDialog.show(CinemaInfoWebActivity.this, "影院信息",
-				"小豆影正在努力的加载...");
+		progressBar = ProgressDialog.show(CinemaInfoWebActivity.this, getResources().getString(R.string.cinema_info),
+				getResources().getString(R.string.load_info));
 
 		mWebView.setWebViewClient(new WebViewClient() {
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
