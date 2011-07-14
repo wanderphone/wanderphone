@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -27,6 +29,10 @@ public class TabRankActivity extends TabActivity {
 	/** Called when the activity is first created. */
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
+    	// 全屏显示
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.tabrankactivity);
 		string1=this.getResources().getString(R.string.select_easy);
 		string2=this.getResources().getString(R.string.select_normal);

@@ -24,7 +24,8 @@
 		<activity android:name="NormalRankActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"/>
 		<activity android:name="HardRankActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"/>
 		<activity android:name="TabRankActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"/>
-		<activity android:name="DeviceListActivityListActivity"
+		<activity android:name="SetActivity" android:theme="@android:style/Theme.NoTitleBar" android:screenOrientation="portrait"/>
+		<activity android:name="DeviceListActivity"
                   android:label="@string/select_device"
                   android:theme="@android:style/Theme.Dialog"
                   android:configChanges="orientation|keyboardHidden" 

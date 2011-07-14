@@ -17,7 +17,7 @@
 <ImageButton
 	android:id="@+id/select_bt1"
 	android:layout_width="180dip"
-	android:layout_height="45dip"
+	android:layout_height="40dip"
 	android:layout_gravity="center_horizontal"
 	android:layout_marginTop="20dip"
 	android:text="@string/select_easy"

@@ -29,9 +29,7 @@ public class SelectActivity extends Activity {
         select_bt1=(ImageButton)findViewById(R.id.select_bt1);
         select_bt2=(ImageButton)findViewById(R.id.select_bt2);
         select_bt3=(ImageButton)findViewById(R.id.select_bt3);
-        select_bt1.getBackground().setColorFilter(0xFFEEEE00, PorterDuff.Mode.MULTIPLY);
-        select_bt2.getBackground().setColorFilter(0xFFEEEE00, PorterDuff.Mode.MULTIPLY);
-        select_bt3.getBackground().setColorFilter(0xFFEEEE00, PorterDuff.Mode.MULTIPLY);
+        
         
         //简单难度按钮监听
         select_bt1.setOnClickListener(new OnClickListener() {

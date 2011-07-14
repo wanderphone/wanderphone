@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android" >
+
+<PreferenceCategory android:key="aa" android:title="@string/set">
+<Preference android:summary="@string/set_share_content" android:title="@string/set_share" android:key="bb" android:selectable="true" android:enabled="true"></Preference>
+
+
+<Preference android:summary="@string/set_feedback_content" android:title="@string/set_feedback" android:key="cc" android:selectable="true" android:enabled="true"></Preference><CheckBoxPreference android:key="dd" android:summary="@string/set_sound_content" android:title="@string/set_sound" android:enabled="true" android:selectable="true" android:defaultValue="true"></CheckBoxPreference>
+<CheckBoxPreference android:key="ee" android:summary="@string/set_vibrate_content" android:title="@string/set_vibrate" android:enabled="true" android:selectable="true" android:defaultValue="true"></CheckBoxPreference>
+</PreferenceCategory>
+</PreferenceScreen>

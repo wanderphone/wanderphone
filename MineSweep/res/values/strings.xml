@@ -91,4 +91,15 @@
 	<string name="sound_off">sound:off</string>
 	<string name="vibrate_on">vibrate:on</string>
 	<string name="vibrate_off">vibrate:off</string>
+	<string name="set">设置</string>
+	<string name="set_share">分享</string>
+	<string name="set_feedback">反馈</string>
+	<string name="set_sound">音效</string>
+	<string name="set_vibrate">震动</string>
+	<string name="set_share_content">分享此应用给自己的好友</string>
+	<string name="set_feedback_content">反馈您的意见帮我们改进MineSweep</string>
+	<string name="set_sound_content">触碰雷的音效</string>
+	<string name="set_vibrate_content">触碰雷的震动效果</string>
+	<string name="share">分享</string>
+	<string name="share_content">在www.wanderphone.com上有个不错的应用叫MineSweep</string>
 </resources>

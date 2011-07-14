@@ -52,10 +52,12 @@ public class SingleActivity extends Activity {
 	private TextView txtMineCount;
 	private TextView txtTimer;
 	private ImageButton btnSmile;
+	private ImageButton imflag;
 	private SharedPreferences sharedPreferences1;
 	private SharedPreferences sharedPreferences2;
 	private Boolean soundflag;
 	private Boolean vibrateflag;
+	private Boolean ibflag=false;
 	//震动
 	static Vibrator vibrator;
 	//音效的音量   
@@ -106,8 +108,9 @@ public class SingleActivity extends Activity {
 		//震动和音效标记；
 		sharedPreferences1=getSharedPreferences("the_soundflag",MODE_PRIVATE);        
         soundflag=sharedPreferences1.getBoolean("soundflag", true);
-		sharedPreferences2=getSharedPreferences("the_vibtateflag",MODE_PRIVATE);        
+		sharedPreferences2=getSharedPreferences("the_vibrateflag",MODE_PRIVATE);        
         vibrateflag=sharedPreferences2.getBoolean("vibrateflag", true);
+        Log.v("====",vibrateflag+"");
 		// 修改部分，获取难度
 		Bundle bundle = this.getIntent().getExtras();
 		numberOfRowsInMineField = bundle.getInt("numberOfRowsInMineField");
@@ -128,6 +131,7 @@ public class SingleActivity extends Activity {
         loadSfx(R.raw.sound1,123);
 
 		btnSmile = (ImageButton) findViewById(R.id.Smiley);
+		imflag=(ImageButton)findViewById(R.id.ibglag);
 		mineField = (TableLayout) findViewById(R.id.MineField);
 
 		endExistingGame();
@@ -137,6 +141,25 @@ public class SingleActivity extends Activity {
 			public void onClick(View view) {
 				endExistingGame();
 				startNewGame();
+				imflag.setBackgroundResource(R.drawable.mine_flag);
+				ibflag=false;
+			}
+		});
+		imflag.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(!ibflag)
+				{
+					imflag.setBackgroundResource(R.drawable.mine_flagss);
+					ibflag=true;
+				}
+				else
+				{
+					imflag.setBackgroundResource(R.drawable.mine_flag);
+					ibflag=false;
+				}
 			}
 		});
 
@@ -332,219 +355,358 @@ public class SingleActivity extends Activity {
 				// particular instance of block only
 				final int currentRow = row;
 				final int currentColumn = column;
+				
+			
 
-				// add Click Listener
-				// this is treated as Left Mouse click
-				blocks[row][column].setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						// start timer on first click
-						if (!isTimerStarted) {
-							startTimer();
-							isTimerStarted = true;
-						}
-
-						// set mines on first click
-						if (!areMinesSet) {
-							areMinesSet = true;
-							setMines(currentRow, currentColumn);
-						}
-
-						// this is not first click
-						// check if current block is flagged
-						// if flagged the don't do anything
-						// as that operation is handled by LongClick
-						// if block is not flagged then uncover nearby blocks
-						// till we get numbered mines
-						if (!blocks[currentRow][currentColumn].isFlagged()) {
-							// open nearby blocks till we get numbered blocks
-							rippleUncover(currentRow, currentColumn);
-
-							// did we clicked a mine
-							if (blocks[currentRow][currentColumn].hasMine()) {
-								// Oops, game over
-								//爆炸音效
-								if(soundflag)
-								{
-									play(123, 0);
-								}
-								else
-								{
-									
-								}
-								//震动
-							    if(vibrateflag)
-								{									
-									long[] pattern = {50,180,}; // OFF/ON/OFF/ON...								
-							        vibrator.vibrate(pattern, -1);
-								}
-							    else
-							    {
-							    	
-							    }
-								
-								finishGame(currentRow, currentColumn);
+					// add Click Listener
+					// this is treated as Left Mouse click
+					blocks[row][column].setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							// start timer on first click
+							if (!isTimerStarted) {
+								startTimer();
+								isTimerStarted = true;
 							}
 
-							// check if we win the game
-							if (checkGameWin()) {
-								// mark game as win
-								winGame();
+							// set mines on first click
+							if (!areMinesSet) {
+								areMinesSet = true;
+								setMines(currentRow, currentColumn);
 							}
-						}
-					}
-				});
 
-				// add Long Click listener
-				// this is treated as right mouse click listener
-				blocks[row][column]
-						.setOnLongClickListener(new OnLongClickListener() {
-							public boolean onLongClick(View view) {
-								// simulate a left-right (middle) click
-								// if it is a long click on an opened mine then
-								// open all surrounding blocks
+							// this is not first click
+							// check if current block is flagged
+							// if flagged the don't do anything
+							// as that operation is handled by LongClick
+							// if block is not flagged then uncover nearby blocks
+							// till we get numbered mines
+							if(ibflag)
+							{
 								if (!blocks[currentRow][currentColumn]
-										.isCovered()
-										&& (blocks[currentRow][currentColumn]
-												.getNumberOfMinesInSorrounding() > 0)
-										&& !isGameOver) {
+														.isCovered()
+														&& (blocks[currentRow][currentColumn]
+																.getNumberOfMinesInSorrounding() > 0)
+														&& !isGameOver) {
+													int nearbyFlaggedBlocks = 0;
+													for (int previousRow = -1; previousRow < 2; previousRow++) {
+														for (int previousColumn = -1; previousColumn < 2; previousColumn++) {
+															if (blocks[currentRow + previousRow][currentColumn
+																	+ previousColumn]
+																	.isFlagged()) {
+																nearbyFlaggedBlocks++;
+															}
+														}
+													}
+
+													// if flagged block count is equal to nearby
+													// mine count
+													// then open nearby blocks
+													if (nearbyFlaggedBlocks == blocks[currentRow][currentColumn]
+															.getNumberOfMinesInSorrounding()) {
+														for (int previousRow = -1; previousRow < 2; previousRow++) {
+															for (int previousColumn = -1; previousColumn < 2; previousColumn++) {
+																// don't open flagged blocks
+																if (!blocks[currentRow
+																		+ previousRow][currentColumn
+																		+ previousColumn]
+																		.isFlagged()) {
+																	// open blocks till we get
+																	// numbered block
+																	rippleUncover(
+																			currentRow
+																					+ previousRow,
+																			currentColumn
+																					+ previousColumn);
+
+																	// did we clicked a mine
+																	if (blocks[currentRow
+																			+ previousRow][currentColumn
+																			+ previousColumn]
+																			.hasMine()) {
+																		// oops game over
+																		finishGame(
+																				currentRow
+																						+ previousRow,
+																				currentColumn
+																						+ previousColumn);
+
+																	}
+
+																	// did we win the game
+																	if (checkGameWin()) {
+																		// mark game as win
+																		winGame();
+																	}
+																}
+															}
+														}
+													}
+
+													// as we no longer want to judge this
+													// gesture so return
+													// not returning from here will actually
+													// trigger other action
+													// which can be marking as a flag or
+													// question mark or blank
+													
+												}
+
+												// if clicked block is enabled, clickable or
+												// flagged
+												if (blocks[currentRow][currentColumn]
+														.isClickable()
+														&& (blocks[currentRow][currentColumn]
+																.isEnabled() || blocks[currentRow][currentColumn]
+																.isFlagged())) {
+
+													// for long clicks set:
+													// 1. empty blocks to flagged
+													// 2. flagged to question mark
+													// 3. question mark to blank
+
+													// case 1. set blank block to flagged
+													if (!blocks[currentRow][currentColumn]
+															.isFlagged()
+															&& !blocks[currentRow][currentColumn]
+																	.isQuestionMarked()) {
+														blocks[currentRow][currentColumn]
+																.setBlockAsDisabled(false);
+														blocks[currentRow][currentColumn]
+																.setFlagIcon(true);
+														blocks[currentRow][currentColumn]
+																.setFlagged(true);
+														minesToFind--; // reduce mine count
+														updateMineCountDisplay();
+													}
+													// case 2. set flagged to question mark
+													else if (!blocks[currentRow][currentColumn]
+															.isQuestionMarked()) {
+														blocks[currentRow][currentColumn]
+																.setBlockAsDisabled(true);
+														blocks[currentRow][currentColumn]
+																.setQuestionMarkIcon(true);
+														blocks[currentRow][currentColumn]
+																.setFlagged(false);
+														blocks[currentRow][currentColumn]
+																.setQuestionMarked(true);
+
+														minesToFind++; // increase mine count
+														updateMineCountDisplay();
+													}
+													// case 3. change to blank square
+													else {
+														blocks[currentRow][currentColumn]
+																.setBlockAsDisabled(true);
+														blocks[currentRow][currentColumn]
+																.clearAllIcons();
+														blocks[currentRow][currentColumn]
+																.setQuestionMarked(false);
+														// if it is flagged then increment mine
+														// count
+														if (blocks[currentRow][currentColumn]
+																.isFlagged()) {
+															minesToFind++; // increase mine
+																			// count
+															updateMineCountDisplay();
+														}
+														// remove flagged status
+														blocks[currentRow][currentColumn]
+																.setFlagged(false);
+													}
+
+													updateMineCountDisplay(); // update mine
+																				// display
+												}
+							}
+							else
+							{
+								if (!blocks[currentRow][currentColumn].isFlagged()) {
+									// open nearby blocks till we get numbered blocks
+									rippleUncover(currentRow, currentColumn);
+
+									// did we clicked a mine
+									if (blocks[currentRow][currentColumn].hasMine()) {
+										// Oops, game over
+										
+										
+										finishGame(currentRow, currentColumn);
+									}
+								if (!blocks[currentRow][currentColumn]
+															.isCovered()
+															&& (blocks[currentRow][currentColumn]
+																	.getNumberOfMinesInSorrounding() > 0)
+															&& !isGameOver)
+								{
 									int nearbyFlaggedBlocks = 0;
 									for (int previousRow = -1; previousRow < 2; previousRow++) {
-										for (int previousColumn = -1; previousColumn < 2; previousColumn++) {
-											if (blocks[currentRow + previousRow][currentColumn
-													+ previousColumn]
-													.isFlagged()) {
-												nearbyFlaggedBlocks++;
-											}
-										}
-									}
+									for (int previousColumn = -1; previousColumn < 2; previousColumn++) {
+									if (blocks[currentRow + previousRow][currentColumn
+																	    + previousColumn]
+																		.isFlagged()) {
+																	nearbyFlaggedBlocks++;
+																}
+															}
+														}
 
-									// if flagged block count is equal to nearby
-									// mine count
-									// then open nearby blocks
-									if (nearbyFlaggedBlocks == blocks[currentRow][currentColumn]
-											.getNumberOfMinesInSorrounding()) {
-										for (int previousRow = -1; previousRow < 2; previousRow++) {
-											for (int previousColumn = -1; previousColumn < 2; previousColumn++) {
-												// don't open flagged blocks
-												if (!blocks[currentRow
-														+ previousRow][currentColumn
-														+ previousColumn]
-														.isFlagged()) {
-													// open blocks till we get
-													// numbered block
-													rippleUncover(
-															currentRow
-																	+ previousRow,
-															currentColumn
-																	+ previousColumn);
+														// if flagged block count is equal to nearby
+														// mine count
+														// then open nearby blocks
+														if (nearbyFlaggedBlocks == blocks[currentRow][currentColumn]
+																.getNumberOfMinesInSorrounding()) {
+															for (int previousRow = -1; previousRow < 2; previousRow++) {
+																for (int previousColumn = -1; previousColumn < 2; previousColumn++) {
+																	// don't open flagged blocks
+																	if (!blocks[currentRow
+																			+ previousRow][currentColumn
+																			+ previousColumn]
+																			.isFlagged()) {
+																		// open blocks till we get
+																		// numbered block
+																		rippleUncover(
+																				currentRow
+																						+ previousRow,
+																				currentColumn
+																						+ previousColumn);
 
-													// did we clicked a mine
-													if (blocks[currentRow
-															+ previousRow][currentColumn
-															+ previousColumn]
-															.hasMine()) {
-														// oops game over
-														finishGame(
-																currentRow
-																		+ previousRow,
-																currentColumn
-																		+ previousColumn);
+																		// did we clicked a mine
+																		if (blocks[currentRow
+																				+ previousRow][currentColumn
+																				+ previousColumn]
+																				.hasMine()) {
+																			// oops game over
+																			finishGame(
+																					currentRow
+																							+ previousRow,
+																					currentColumn
+																							+ previousColumn);
 
+																		}
+
+																		// did we win the game
+																		if (checkGameWin()) {
+																			// mark game as win
+																			winGame();
+																		}
+																	}
+																}
+															}
+														}
+
+														// as we no longer want to judge this
+														// gesture so return
+														// not returning from here will actually
+														// trigger other action
+														// which can be marking as a flag or
+														// question mark or blank
+														
 													}
-
-													// did we win the game
-													if (checkGameWin()) {
-														// mark game as win
-														winGame();
-													}
-												}
-											}
-										}
-									}
-
-									// as we no longer want to judge this
-									// gesture so return
-									// not returning from here will actually
-									// trigger other action
-									// which can be marking as a flag or
-									// question mark or blank
-									return true;
-								}
-
-								// if clicked block is enabled, clickable or
-								// flagged
-								if (blocks[currentRow][currentColumn]
-										.isClickable()
-										&& (blocks[currentRow][currentColumn]
-												.isEnabled() || blocks[currentRow][currentColumn]
-												.isFlagged())) {
-
-									// for long clicks set:
-									// 1. empty blocks to flagged
-									// 2. flagged to question mark
-									// 3. question mark to blank
-
-									// case 1. set blank block to flagged
-									if (!blocks[currentRow][currentColumn]
-											.isFlagged()
-											&& !blocks[currentRow][currentColumn]
-													.isQuestionMarked()) {
-										blocks[currentRow][currentColumn]
-												.setBlockAsDisabled(false);
-										blocks[currentRow][currentColumn]
-												.setFlagIcon(true);
-										blocks[currentRow][currentColumn]
-												.setFlagged(true);
-										minesToFind--; // reduce mine count
-										updateMineCountDisplay();
-									}
-									// case 2. set flagged to question mark
-									else if (!blocks[currentRow][currentColumn]
-											.isQuestionMarked()) {
-										blocks[currentRow][currentColumn]
-												.setBlockAsDisabled(true);
-										blocks[currentRow][currentColumn]
-												.setQuestionMarkIcon(true);
-										blocks[currentRow][currentColumn]
-												.setFlagged(false);
-										blocks[currentRow][currentColumn]
-												.setQuestionMarked(true);
-
-										minesToFind++; // increase mine count
-										updateMineCountDisplay();
-									}
-									// case 3. change to blank square
-									else {
-										blocks[currentRow][currentColumn]
-												.setBlockAsDisabled(true);
-										blocks[currentRow][currentColumn]
-												.clearAllIcons();
-										blocks[currentRow][currentColumn]
-												.setQuestionMarked(false);
-										// if it is flagged then increment mine
-										// count
-										if (blocks[currentRow][currentColumn]
-												.isFlagged()) {
-											minesToFind++; // increase mine
-															// count
-											updateMineCountDisplay();
-										}
-										// remove flagged status
-										blocks[currentRow][currentColumn]
-												.setFlagged(false);
-									}
-
-									updateMineCountDisplay(); // update mine
-																// display
-								}
-
-								return true;
+									
 							}
-						});
+							
+								// check if we win the game
+								if (checkGameWin()) {
+									// mark game as win
+									winGame();
+								}
+							}
+						}
+					});
+
+					// add Long Click listener
+					// this is treated as right mouse click listener
+					
+					blocks[row][column]
+							.setOnLongClickListener(new OnLongClickListener() {
+								public boolean onLongClick(View view) {
+									// simulate a left-right (middle) click
+									// if it is a long click on an opened mine then
+									// open all surrounding blocks
+									if(ibflag)
+									{
+										return false;
+									}
+									else
+									{
+										
+
+														// if clicked block is enabled, clickable or
+														// flagged
+														if (blocks[currentRow][currentColumn]
+																.isClickable()
+																&& (blocks[currentRow][currentColumn]
+																		.isEnabled() || blocks[currentRow][currentColumn]
+																		.isFlagged())) {
+
+															// for long clicks set:
+															// 1. empty blocks to flagged
+															// 2. flagged to question mark
+															// 3. question mark to blank
+
+															// case 1. set blank block to flagged
+															if (!blocks[currentRow][currentColumn]
+																	.isFlagged()
+																	&& !blocks[currentRow][currentColumn]
+																			.isQuestionMarked()) {
+																blocks[currentRow][currentColumn]
+																		.setBlockAsDisabled(false);
+																blocks[currentRow][currentColumn]
+																		.setFlagIcon(true);
+																blocks[currentRow][currentColumn]
+																		.setFlagged(true);
+																minesToFind--; // reduce mine count
+																updateMineCountDisplay();
+															}
+															// case 2. set flagged to question mark
+															else if (!blocks[currentRow][currentColumn]
+																	.isQuestionMarked()) {
+																blocks[currentRow][currentColumn]
+																		.setBlockAsDisabled(true);
+																blocks[currentRow][currentColumn]
+																		.setQuestionMarkIcon(true);
+																blocks[currentRow][currentColumn]
+																		.setFlagged(false);
+																blocks[currentRow][currentColumn]
+																		.setQuestionMarked(true);
+
+																minesToFind++; // increase mine count
+																updateMineCountDisplay();
+															}
+															// case 3. change to blank square
+															else {
+																blocks[currentRow][currentColumn]
+																		.setBlockAsDisabled(true);
+																blocks[currentRow][currentColumn]
+																		.clearAllIcons();
+																blocks[currentRow][currentColumn]
+																		.setQuestionMarked(false);
+																// if it is flagged then increment mine
+																// count
+																if (blocks[currentRow][currentColumn]
+																		.isFlagged()) {
+																	minesToFind++; // increase mine
+																					// count
+																	updateMineCountDisplay();
+																}
+																// remove flagged status
+																blocks[currentRow][currentColumn]
+																		.setFlagged(false);
+															}
+
+															updateMineCountDisplay(); // update mine
+																						// display
+														}
+
+														return true;
+									}
+									
+								}
+							});
+				}
+
 			}
 		}
-	}
+	
 
 	private boolean checkGameWin() {
 		for (int row = 1; row < numberOfRowsInMineField + 1; row++) {
@@ -680,7 +842,7 @@ public class SingleActivity extends Activity {
 									.setPositiveButton(R.string.go_on_game, new DialogInterface.OnClickListener(){
 										 public void onClick(DialogInterface dialog, int which) {
 										     // TODO Auto-generated method stub
-												btnSmile.setBackgroundResource(R.drawable.ib_forward);
+												//btnSmile.setBackgroundResource(R.drawable.ib_forward);
 										     }
 										 }).setNegativeButton(R.string.select_level_again, new DialogInterface.OnClickListener(){
 											 public void onClick(DialogInterface dialog, int which) {
@@ -707,10 +869,29 @@ public class SingleActivity extends Activity {
 		isGameOver = true; // mark game as over
 		stopTimer(); // stop timer
 		isTimerStarted = false;
-		btnSmile.setBackgroundResource(R.drawable.mine_start);
+		//btnSmile.setBackgroundResource(R.drawable.mine_start);
 
 		// show all mines
 		// disable all blocks
+		//爆炸音效
+		if(soundflag)
+		{
+			play(123, 0);
+		}
+		else
+		{
+			
+		}
+		//震动
+	    if(vibrateflag)
+		{									
+			long[] pattern = {50,180,}; // OFF/ON/OFF/ON...								
+	        vibrator.vibrate(pattern, -1);
+		}
+	    else
+	    {
+	    	
+	    }
 
 		for (int row = 1; row < numberOfRowsInMineField + 1; row++) {
 			for (int column = 1; column < numberOfColumnsInMineField + 1; column++) {

@@ -43,7 +43,7 @@ public class ServerActivity extends Activity {
 	private ImageButton btnSmile;
 	private TableLayout mineField; // table layout to add mines to
 	private Block blocks[][]; // blocks for mine field	
-	private int blockDimension = 48; // width of each block
+	private int blockDimension = 36; // width of each block
 	private int numberOfRowsInMineField=13 ;
 	private int numberOfColumnsInMineField=14 ;
 	private int totalNumberOfMines=41 ;
