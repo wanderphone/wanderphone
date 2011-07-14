@@ -7,6 +7,6 @@
 
 
 <Preference android:summary="@string/string47" android:title="@string/string46" android:key="cc" android:selectable="true" android:enabled="true"></Preference><CheckBoxPreference android:key="dd" android:summary="@string/string49" android:title="@string/string48" android:enabled="true" android:selectable="true"></CheckBoxPreference>
-
+<CheckBoxPreference android:key="ee" android:summary="@string/string72" android:title="@string/string71" android:enabled="true" android:selectable="true"></CheckBoxPreference>
 </PreferenceCategory>
 </PreferenceScreen>

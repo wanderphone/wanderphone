@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -23,7 +24,7 @@ public class MainActivity extends Activity {
 	private ImageButton bt_rank;
 	private ImageButton bt_help;
 	private ImageButton bt_about;
-
+	private ImageButton bt_set;
 	
 
 	@Override
@@ -45,6 +46,7 @@ public class MainActivity extends Activity {
 		bt_rank = (ImageButton) findViewById(R.id.bt_rank);
 		bt_help = (ImageButton) findViewById(R.id.bt_help);
 		bt_about = (ImageButton) findViewById(R.id.bt_about);
+		bt_set = (ImageButton) findViewById(R.id.bt_set);
 		
 	}
 
@@ -54,11 +56,8 @@ public class MainActivity extends Activity {
 		bt_rank.setOnClickListener(cal_rank);
 		bt_help.setOnClickListener(cal_help);
 		bt_about.setOnClickListener(cal_about);
-		bt_single.getBackground().setColorFilter(0xFFEEEE00, PorterDuff.Mode.MULTIPLY);
-		bt_multiple.getBackground().setColorFilter(0xFFEEEE00, PorterDuff.Mode.MULTIPLY);
-		bt_rank.getBackground().setColorFilter(0xFFEEEE00, PorterDuff.Mode.MULTIPLY);
-		bt_help.getBackground().setColorFilter(0xFFEEEE00, PorterDuff.Mode.MULTIPLY);
-		bt_about.getBackground().setColorFilter(0xFFEEEE00, PorterDuff.Mode.MULTIPLY);
+		bt_set.setOnClickListener(cal_set);
+		
 	}
 
 	
@@ -68,9 +67,47 @@ public class MainActivity extends Activity {
 		@Override
 		public void onClick(View arg0) {
 			// TODO Auto-generated method stub
-			Intent intent = new Intent();
-			intent.setClass(MainActivity.this, SelectActivity.class);
-			startActivity(intent);	
+			SharedPreferences sharedPreferences1=getSharedPreferences("the_gameflag",MODE_PRIVATE);        
+	        int difficultyflag=sharedPreferences1.getInt("gameflag", 1);
+	        //简单难度
+			if(difficultyflag==1)
+			{
+				Intent intent=new Intent();
+				intent.setClass(MainActivity.this, SingleActivity.class);
+				Bundle bundle=new Bundle();
+				bundle.putInt("numberOfRowsInMineField", 9);
+				bundle.putInt("numberOfColumnsInMineField",9);
+				bundle.putInt("totalNumberOfMines", 10);
+				intent.putExtras(bundle);
+				startActivity(intent);
+				
+			}
+			//中等难度
+			if(difficultyflag==2)
+			{
+				Intent intent=new Intent();
+				intent.setClass(MainActivity.this, SingleActivity.class);
+				Bundle bundle=new Bundle();
+				bundle.putInt("numberOfRowsInMineField", 16);
+				bundle.putInt("numberOfColumnsInMineField", 16);
+				bundle.putInt("totalNumberOfMines", 40);
+				intent.putExtras(bundle);
+				startActivity(intent);
+				
+			}
+			//困难难度
+			if(difficultyflag==3)
+			{
+				Intent intent=new Intent();
+				intent.setClass(MainActivity.this, SingleActivity.class);
+				Bundle bundle=new Bundle();
+				bundle.putInt("numberOfRowsInMineField", 20);
+				bundle.putInt("numberOfColumnsInMineField", 20);
+				bundle.putInt("totalNumberOfMines", 60);
+				intent.putExtras(bundle);
+				startActivity(intent);
+				
+			}
 		}
 
 	};
@@ -118,6 +155,18 @@ public class MainActivity extends Activity {
 			// TODO Auto-generated method stub
 			Intent intent = new Intent();
 			intent.setClass(MainActivity.this, AboutActivity.class);
+			startActivity(intent);
+		}
+
+	};
+	// 设置监听
+	private ImageButton.OnClickListener cal_set = new ImageButton.OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+			// TODO Auto-generated method stub
+			Intent intent = new Intent();
+			intent.setClass(MainActivity.this, SetActivity.class);
 			startActivity(intent);
 		}
 

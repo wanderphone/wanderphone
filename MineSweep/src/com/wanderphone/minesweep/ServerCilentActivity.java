@@ -27,9 +27,7 @@ public class ServerCilentActivity extends Activity {
         server_bt1=(ImageButton)findViewById(R.id.server_bt1);
         server_bt2=(ImageButton)findViewById(R.id.server_bt2);
         server_bt3=(ImageButton)findViewById(R.id.server_bt3);
-        server_bt1.getBackground().setColorFilter(0xFFEEEE00, PorterDuff.Mode.MULTIPLY);
-        server_bt2.getBackground().setColorFilter(0xFFEEEE00, PorterDuff.Mode.MULTIPLY);
-        server_bt3.getBackground().setColorFilter(0xFFEEEE00, PorterDuff.Mode.MULTIPLY);
+        
         //建立游戏按钮监听
         server_bt1.setOnClickListener(new OnClickListener() {
 			

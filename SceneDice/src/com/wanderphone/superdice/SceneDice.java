@@ -1,4 +1,4 @@
-package com.wonderphone.superdice;
+package com.wanderphone.superdice;
 
 import java.util.HashMap;
 import java.util.List;
@@ -47,8 +47,7 @@ public class SceneDice extends Activity implements SensorEventListener
 
 {
 	//音效的音量   
-	static int streamVolume;   
-	  
+	static int streamVolume;     
 	//定义SoundPool 对象   
 	  private static SoundPool soundPool;    
 	  
@@ -62,6 +61,8 @@ public class SceneDice extends Activity implements SensorEventListener
 	static Vibrator vibrator;
 	// 震动标记
 	private static boolean vflag;
+	// 音效标记
+	private static boolean sflag;
 	//模式选择标记
 	private int arg;
 	
@@ -442,9 +443,13 @@ public class SceneDice extends Activity implements SensorEventListener
 	    * Description:  播放声音  
 	    * Notes:        none.  
 	    ***************************************************************/  
-	    public static void play(int sound, int uLoop) {  
-	    
-	      soundPool.play(soundPoolMap.get(sound), streamVolume, streamVolume, 1, uLoop, 1f);    
+	    public static void play(int sound, int uLoop) { 
+	    	
+	      if(sflag)
+	      {
+	    	  soundPool.play(soundPoolMap.get(sound), streamVolume, streamVolume, 1, uLoop, 1f);  
+	      }
+	       
 	    }  
 
 	    public static void abc() {
@@ -475,7 +480,9 @@ public class SceneDice extends Activity implements SensorEventListener
 			 			  
 		}
 		SharedPreferences sharedPreferences3=getSharedPreferences("vmy_flag",MODE_PRIVATE);		
-	    vflag=sharedPreferences3.getBoolean("vflag", false);   
+	    vflag=sharedPreferences3.getBoolean("vflag", false);
+	    SharedPreferences sharedPreferences4=getSharedPreferences("smy_flag",MODE_PRIVATE);		
+	    sflag=sharedPreferences4.getBoolean("sflag", false);   
 		super.onResume();
 		mWakeLock.acquire();
 		//����SensorManager��һ���б�(Listener)
