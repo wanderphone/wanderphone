@@ -3,6 +3,8 @@ package com.wanderphone.douying;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -18,6 +20,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gdata.data.douban.SubjectFeed;
 import com.google.gdata.util.ServiceException;
@@ -164,18 +167,41 @@ public class SearchActivity extends BaseActivity {
 
 	};
 
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 
 		if (keyCode == KeyEvent.KEYCODE_MENU) {
 			super.openOptionsMenu();
 		}
-		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-			doExit();
-			return true;
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+			if (isExit == false) {
+				isExit = true;
+				Toast.makeText(this,
+						getResources().getString(R.string.app_quit),
+						Toast.LENGTH_SHORT).show();
+				if (!hasTask) {
+					tExit.schedule(task, 5000);
+				}
+			} else {
+				finish();
+				System.exit(0);
+			}
 		}
 		return true;
 	}
+
+	private static Boolean isExit = false;
+	private static Boolean hasTask = false;
+	Timer tExit = new Timer();
+	TimerTask task = new TimerTask() {
+		@Override
+		public void run() {
+			isExit = false;
+			hasTask = true;
+		}
+	};
 
 	@Override
 	public void onOptionsMenuClosed(Menu menu) {

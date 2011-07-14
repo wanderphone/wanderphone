@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -44,14 +45,16 @@ public class NowPlayingListActivity extends BaseListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
-		MobclickAgent.onError(this);
+
 		db_adapter.open();
 		boolean isExists = db_adapter.if_np_exists();//数据库是否存在
 		boolean isConnecting = isConnecting();//网络连接是否正常
+		super.onCreate(savedInstanceState);
+		MobclickAgent.onError(this);
 
 		setContentView(R.layout.movie_list);
 
+		
 		if (isExists && isConnecting) {
 			addListHeaderView();
 			movies = db_adapter.loadNpData();

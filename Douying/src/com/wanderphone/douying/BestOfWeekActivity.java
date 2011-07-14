@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mobclick.android.MobclickAgent;
 import com.wanderphone.getxml.MovieSubject;
 import com.wanderphone.getxml.NetUtil;
 import com.wanderphone.myAdapter.ClassicListAdapter;
@@ -47,9 +48,10 @@ public class BestOfWeekActivity extends BaseListActivity {
 		boolean isExists = db_adapter.if_week_exists();// 数据库是否存在
 		boolean isConnecting = isConnecting();// 网络连接是否正常
 		super.onCreate(savedInstanceState);
+		MobclickAgent.onError(this);
 
 		setContentView(R.layout.movie_list);
-
+		
 		if (isExists && isConnecting) {
 			addListHeaderView();
 			movies = db_adapter.loadWeekData();

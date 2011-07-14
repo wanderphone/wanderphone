@@ -34,7 +34,7 @@ public class DataBaseAdapter {
 	// 数据库名称为data
 	private static final String DB_NAME = "douying.db";
 	// 数据库表名
-	private static final String DB_TABLE = "nowplaying";
+	private static final String DB_TABLE_NP = "nowplaying";
 
 	private static final String DB_TABLE_WEEK = "week";
 	private static final String DB_TABLE_BEST = "best";
@@ -43,7 +43,7 @@ public class DataBaseAdapter {
 	// 本地Context对象
 	private Context mContext = null;
 	// 创建一个表
-	private static final String DB_CREATE_NP = "create table " + DB_TABLE
+	private static final String DB_CREATE_NP = "create table " + DB_TABLE_NP
 			+ " (" + KEY_ID + " integer primary key autoincrement," + KEY_NAME
 			+ " text," + KEY_TYPE + " text," + KEY_DURATION + " text,"
 			+ KEY_PUB_AREA + " text," + KEY_RATING + " text," + KEY_CINEMA
@@ -107,10 +107,11 @@ public class DataBaseAdapter {
 
 	}
 	public boolean if_week_exists() {
-
+		
 		Cursor cursor = mSQLiteDatabase.query(DB_TABLE_WEEK, new String[] {
 				KEY_NAME}, null, null, null, null, null);
 		if (cursor.getCount() == 0) {
+			Log.v("ss", "0_w");
 			cursor.close();
 			return false;
 		} else {
@@ -121,10 +122,12 @@ public class DataBaseAdapter {
 	}
 	public boolean if_np_exists() {
 
-		Cursor cursor = mSQLiteDatabase.query(DB_TABLE, new String[] {
+		Cursor cursor = mSQLiteDatabase.query(DB_TABLE_NP, new String[] {
 				KEY_NAME, KEY_TYPE, KEY_DURATION, KEY_PUB_AREA, KEY_CINEMA,
-				KEY_RATING }, null, null, null, null, null);
+				KEY_RATING, KEY_IMG }, null, null, null, null, null);
+
 		if (cursor.getCount() == 0) {
+			Log.v("ss", "0_n");
 			cursor.close();
 			return false;
 		} else {
@@ -164,12 +167,12 @@ public class DataBaseAdapter {
 	}
 
 	public void delete_all_week() {
-		String sql_delete = "delete from nowplaying";
+		String sql_delete = "delete from week";
 		mSQLiteDatabase.execSQL(sql_delete);
 	}
 
 	public void delete_all_best() {
-		String sql_delete = "delete from nowplaying";
+		String sql_delete = "delete from best";
 		mSQLiteDatabase.execSQL(sql_delete);
 	}
 
@@ -207,7 +210,7 @@ public class DataBaseAdapter {
 	}
 
 	public List<MovieSubject> loadBestData() {
-		Cursor cursor = mSQLiteDatabase.query(DB_TABLE, new String[] {
+		Cursor cursor = mSQLiteDatabase.query(DB_TABLE_BEST, new String[] {
 				KEY_NAME, KEY_IMG }, null, null, null, null, null);
 		List<MovieSubject> movies = new ArrayList<MovieSubject>();
 		while (cursor.moveToNext()) {
@@ -232,11 +235,11 @@ public class DataBaseAdapter {
 		initialValues.put(KEY_CINEMA, cinema);
 		initialValues.put(KEY_RATING, rating);
 		initialValues.put(KEY_IMG, img);
-		return mSQLiteDatabase.insert(DB_TABLE, KEY_ID, initialValues);
+		return mSQLiteDatabase.insert(DB_TABLE_NP, KEY_ID, initialValues);
 	}
 
 	public List<MovieSubject> loadNpData() {
-		Cursor cursor = mSQLiteDatabase.query(DB_TABLE, new String[] {
+		Cursor cursor = mSQLiteDatabase.query(DB_TABLE_NP, new String[] {
 				KEY_NAME, KEY_TYPE, KEY_DURATION, KEY_PUB_AREA, KEY_CINEMA,
 				KEY_RATING, KEY_IMG }, null, null, null, null, null);
 		List<MovieSubject> movies = new ArrayList<MovieSubject>();
@@ -257,17 +260,17 @@ public class DataBaseAdapter {
 
 	// 删除一条数据
 	public boolean deleteData(long rowId) {
-		return mSQLiteDatabase.delete(DB_TABLE, KEY_ID + "=" + rowId, null) > 0;
+		return mSQLiteDatabase.delete(DB_TABLE_NP, KEY_ID + "=" + rowId, null) > 0;
 	}
 
 	// 删除一条数据
 	public void deleteAll() {
-		mSQLiteDatabase.delete(DB_TABLE, null, null);
+		mSQLiteDatabase.delete(DB_TABLE_NP, null, null);
 	}
 
 	// 通过Cursor查询所有数据
 	public Cursor fetchAllData() {
-		Cursor cursor = mSQLiteDatabase.query(DB_TABLE, new String[] {
+		Cursor cursor = mSQLiteDatabase.query(DB_TABLE_NP, new String[] {
 				KEY_NAME, KEY_TYPE, KEY_DURATION, KEY_PUB_AREA, KEY_CINEMA,
 				KEY_RATING }, null, null, null, null, null);
 		while (cursor.moveToNext()) {
@@ -280,14 +283,14 @@ public class DataBaseAdapter {
 		Log.v("cursor", String.valueOf(cursor.getCount()));
 
 		cursor.close();
-		return mSQLiteDatabase.query(DB_TABLE, new String[] { KEY_NAME,
+		return mSQLiteDatabase.query(DB_TABLE_NP, new String[] { KEY_NAME,
 				KEY_TYPE, KEY_DURATION, KEY_PUB_AREA, KEY_CINEMA, KEY_RATING },
 				null, null, null, null, null);
 	}
 
 	// 查询指定数据
 	public Cursor fetchData(long rowId) throws SQLException {
-		Cursor mCursor = mSQLiteDatabase.query(true, DB_TABLE, new String[] {
+		Cursor mCursor = mSQLiteDatabase.query(true, DB_TABLE_NP, new String[] {
 				KEY_ID, KEY_NUM, KEY_DATA }, KEY_ID + "=" + rowId, null, null,
 				null, null, null);
 		if (mCursor != null) {
@@ -301,7 +304,7 @@ public class DataBaseAdapter {
 		ContentValues args = new ContentValues();
 		args.put(KEY_NUM, num);
 		args.put(KEY_DATA, data);
-		return mSQLiteDatabase.update(DB_TABLE, args, KEY_ID + "=" + rowId,
+		return mSQLiteDatabase.update(DB_TABLE_NP, args, KEY_ID + "=" + rowId,
 				null) > 0;
 	}
 
