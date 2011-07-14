@@ -1,5 +1,6 @@
 package com.wanderphone.minesweep;
 
+import java.net.URLEncoder;
 import java.util.UUID;
 
 //import com.minesweep.R;
@@ -77,7 +78,7 @@ public class RegisterActivity extends Activity {
 				else
 				{
 					registerUrl = getResources().getString(R.string.websit) + "?phone_id=" + uniqueId
-						+ "&which_use=2&username=" + username;
+						+ "&which_use=2&username=" + URLEncoder.encode(username);
 					
 					String registerReturnString = HttpClientConnector.getStringByUrl(registerUrl);
 					RegisterReturnMessage registerReturnMessage = RegisterReturnMessageParse

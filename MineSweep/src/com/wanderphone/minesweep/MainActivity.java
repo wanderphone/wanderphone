@@ -67,8 +67,8 @@ public class MainActivity extends Activity {
 		@Override
 		public void onClick(View arg0) {
 			// TODO Auto-generated method stub
-			SharedPreferences sharedPreferences1=getSharedPreferences("the_difficultyflag",MODE_PRIVATE);        
-	        int difficultyflag=sharedPreferences1.getInt("difficultyflag", 1);
+			SharedPreferences sharedPreferences1=getSharedPreferences("the_gameflag",MODE_PRIVATE);        
+	        int difficultyflag=sharedPreferences1.getInt("gameflag", 1);
 	        //简单难度
 			if(difficultyflag==1)
 			{

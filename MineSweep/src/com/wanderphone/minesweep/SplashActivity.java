@@ -49,31 +49,6 @@ public class SplashActivity extends Activity{
 		setContentView(R.layout.splash);
 		
 		SelectDataOnInternet();
-		
-		new Handler().postDelayed(new Runnable(){
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				if(flag == 0)
-				{
-					Intent mainIntent = null;
-					mainIntent = new Intent(SplashActivity.this,
-							MainActivity.class);
-					SplashActivity.this.startActivity(mainIntent);
-					SplashActivity.this.finish();
-				}
-				else if(flag ==1)
-				{
-					Intent mainIntent = null;
-					mainIntent = new Intent(SplashActivity.this,
-							RegisterActivity.class);
-					SplashActivity.this.startActivity(mainIntent);
-					SplashActivity.this.finish();
-				}
-			}
-			
-		}, 1500);
 	}
 	private void SelectDataOnInternet(){
 		new AsyncTask<Void, Void, Boolean>(){
@@ -100,30 +75,45 @@ public class SplashActivity extends Activity{
 				super.onPostExecute(result);
 				if(result){
 					if(splashMessage.getIsRegister().equals("no")||splashMessage.getIsRegister()==null)
-						flag = 1;
+					{
+						Intent in = new Intent();
+						in.setClass(SplashActivity.this, RegisterActivity.class);
+						startActivity(in);
+						SplashActivity.this.finish();
+					}
 					else if(splashMessage.getIsRegister().equals("yes"))
 					{
 						if(splashMessage.getEasyRank().equals("-1"))			
-							easyRank = "您还没有玩过这个难度";
+							easyRank = getResources().getString(R.string.string_no_play);
 						else
 							easyRank = "第"+splashMessage.getEasyRank()+"名";
 						
 						if(splashMessage.getNormalRank().equals("-1"))			
-							normalRank = "您还没有玩过这个难度";
+							normalRank = getResources().getString(R.string.string_no_play);
 						else
 							normalRank = "第"+splashMessage.getNormalRank()+"名";
 						
 						if(splashMessage.getHardRank().equals("-1"))			
-							hardRank = "您还没有玩过这个难度";
+							hardRank = getResources().getString(R.string.string_no_play);
 						else
 							hardRank = "第"+splashMessage.getHardRank()+"名";
 						
-						Toast.makeText(SplashActivity.this, "您目前在全国的游戏排名情况：\n简单难度："+easyRank+
-								"；\n中等难度："+normalRank+"；\n困难难度："+hardRank, Toast.LENGTH_LONG).show();
+						Toast.makeText(SplashActivity.this, getResources().getString(R.string.string_rank_prompt)
+								+"\n"+getResources().getString(R.string.string_easy)+easyRank+
+								"；\n"+getResources().getString(R.string.string_normal)+normalRank+"；\n"
+								+getResources().getString(R.string.string_hard)+hardRank, Toast.LENGTH_LONG).show();
+						Intent in = new Intent();
+						in.setClass(SplashActivity.this, MainActivity.class);
+						startActivity(in);
+						SplashActivity.this.finish();
 					}
 				}else{
 					Toast.makeText(SplashActivity.this, R.string.failed_connect, Toast.LENGTH_LONG)
 								.show();
+					Intent in = new Intent();
+					in.setClass(SplashActivity.this, MainActivity.class);
+					startActivity(in);
+					SplashActivity.this.finish();
 				}
 			}
 			

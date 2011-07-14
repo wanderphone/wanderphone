@@ -53,11 +53,16 @@ public class SingleActivity extends Activity {
 	private TextView txtTimer;
 	private ImageButton btnSmile;
 	private ImageButton imflag;
+	private ImageButton bt_easy;
+	private ImageButton bt_normal;
+	private ImageButton bt_hard;
 	private SharedPreferences sharedPreferences1;
 	private SharedPreferences sharedPreferences2;
+	private SharedPreferences sharedPreferences;
 	private Boolean soundflag;
 	private Boolean vibrateflag;
 	private Boolean ibflag=false;
+	private int gameflag;
 	//震动
 	static Vibrator vibrator;
 	//音效的音量   
@@ -110,6 +115,8 @@ public class SingleActivity extends Activity {
         soundflag=sharedPreferences1.getBoolean("soundflag", true);
 		sharedPreferences2=getSharedPreferences("the_vibrateflag",MODE_PRIVATE);        
         vibrateflag=sharedPreferences2.getBoolean("vibrateflag", true);
+        sharedPreferences=getSharedPreferences("the_gameflag",MODE_PRIVATE);        
+        gameflag=sharedPreferences.getInt("gameflag", 1);
         Log.v("====",vibrateflag+"");
 		// 修改部分，获取难度
 		Bundle bundle = this.getIntent().getExtras();
@@ -117,9 +124,14 @@ public class SingleActivity extends Activity {
 		numberOfColumnsInMineField = bundle
 				.getInt("numberOfColumnsInMineField");
 		totalNumberOfMines = bundle.getInt("totalNumberOfMines");
+       
 		//
 		txtMineCount = (TextView) findViewById(R.id.MineCount);
 		txtTimer = (TextView) findViewById(R.id.Timer);
+		//难度选择按钮
+		bt_easy = (ImageButton)findViewById(R.id.easy);
+		bt_normal = (ImageButton)findViewById(R.id.normal);
+		bt_hard = (ImageButton)findViewById(R.id.hard);
 
 		// set font style for timer and mine count to LCD style
 		Typeface lcdFont = Typeface.createFromAsset(getAssets(),
@@ -141,9 +153,56 @@ public class SingleActivity extends Activity {
 			public void onClick(View view) {
 				endExistingGame();
 				startNewGame();
+				btnSmile.setBackgroundResource(R.drawable.smiles_selector);
 				imflag.setBackgroundResource(R.drawable.mine_flag);
 				ibflag=false;
 			}
+		});
+		bt_easy.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Editor editor=sharedPreferences.edit();
+      		    editor.putInt("gameflag", 1);
+      		    editor.commit();
+				numberOfRowsInMineField = 9;
+				numberOfColumnsInMineField = 9;
+				totalNumberOfMines = 10;
+				endExistingGame();
+				startNewGame();
+			}	
+		});
+		
+		bt_normal.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Editor editor=sharedPreferences.edit();
+      		    editor.putInt("gameflag", 2);
+      		    editor.commit();
+				numberOfRowsInMineField = 16;
+				numberOfColumnsInMineField = 16;
+				totalNumberOfMines = 40;
+				endExistingGame();
+				startNewGame();
+			}	
+		});
+		
+		bt_hard.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Editor editor=sharedPreferences.edit();
+      		    editor.putInt("gameflag", 3);
+      		    editor.commit();
+				numberOfRowsInMineField = 20;
+				numberOfColumnsInMineField = 20;
+				totalNumberOfMines = 60;
+				endExistingGame();
+				startNewGame();
+			}	
 		});
 		imflag.setOnClickListener(new OnClickListener() {
 			
@@ -835,10 +894,10 @@ public class SingleActivity extends Activity {
 							 Dialog dialog = new AlertDialog.Builder(SingleActivity.this)
 									.setIcon(R.drawable.cool)
 									.setTitle("congratulation")
-									.setMessage("您的本次成绩是" + gameMessage.getTimeThis() + "s; 在全国排名为"
+									.setMessage(getResources().getString(R.string.string_this_score) + gameMessage.getTimeThis() + getResources().getString(R.string.string_all_country)
 													+ gameMessage.getRankThis() + "\n"
-													+ "您的最好成绩是" + gameMessage.getTimeBefore()
-													+ "s; 在全国排名为" + gameMessage.getRankBefore())
+													+ getResources().getString(R.string.string_best_score) + gameMessage.getTimeBefore()
+													+ getResources().getString(R.string.string_all_country) + gameMessage.getRankBefore())
 									.setPositiveButton(R.string.go_on_game, new DialogInterface.OnClickListener(){
 										 public void onClick(DialogInterface dialog, int which) {
 										     // TODO Auto-generated method stub
@@ -869,7 +928,7 @@ public class SingleActivity extends Activity {
 		isGameOver = true; // mark game as over
 		stopTimer(); // stop timer
 		isTimerStarted = false;
-		//btnSmile.setBackgroundResource(R.drawable.mine_start);
+		btnSmile.setBackgroundResource(R.drawable.sad);
 
 		// show all mines
 		// disable all blocks
