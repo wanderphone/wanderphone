@@ -2,9 +2,13 @@ package com.wanderphone.douying;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -62,6 +66,30 @@ public class BaseListActivity extends ListActivity {
 
 				}).show();
 
+	}
+	public boolean isConnecting() {
+		ConnectivityManager mConnectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		TelephonyManager mTelephony = (TelephonyManager) this
+				.getSystemService(TELEPHONY_SERVICE);
+
+		NetworkInfo info = mConnectivity.getActiveNetworkInfo();
+
+		if (info == null || !mConnectivity.getBackgroundDataSetting()) {
+			return false;
+		}
+
+		int netType = info.getType();
+		int netSubtype = info.getSubtype();
+
+		if (netType == ConnectivityManager.TYPE_WIFI) {
+			return info.isConnected();
+		} else if (netType == ConnectivityManager.TYPE_MOBILE
+				&& netSubtype == TelephonyManager.NETWORK_TYPE_UMTS
+				&& !mTelephony.isNetworkRoaming()) {
+			return info.isConnected();
+		} else {
+			return false;
+		}
 	}
 
 	public void showProgressBar() {

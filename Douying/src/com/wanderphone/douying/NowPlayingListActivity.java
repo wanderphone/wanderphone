@@ -2,6 +2,8 @@ package com.wanderphone.douying;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -45,17 +47,35 @@ public class NowPlayingListActivity extends BaseListActivity {
 		super.onCreate(savedInstanceState);
 		MobclickAgent.onError(this);
 		db_adapter.open();
+		boolean isExists = db_adapter.if_np_exists();//数据库是否存在
+		boolean isConnecting = isConnecting();//网络连接是否正常
+
 		setContentView(R.layout.movie_list);
-		if (db_adapter.if_np_exists()) {
+
+		if (isExists && isConnecting) {
 			addListHeaderView();
 			movies = db_adapter.loadNpData();
 			setListAdapter(new NowPlayingListAdapter(
 					NowPlayingListActivity.this, getListView(), movies));
 			showListAsyncTask();
-		} else {
+		} else if (!isExists && isConnecting) {
 			showListAsyncTask();
+		} else if (isExists && !isConnecting) {
+			addListHeaderView();
+			movies = db_adapter.loadNpData();
+			setListAdapter(new NowPlayingListAdapter(
+					NowPlayingListActivity.this, getListView(), movies));
+			Toast.makeText(NowPlayingListActivity.this,
+					getResources().getString(R.string.network_failed),
+					Toast.LENGTH_SHORT).show();
+		} else {
+			addListHeaderView();
+			setListAdapter(new NowPlayingListAdapter(
+					NowPlayingListActivity.this, getListView(), movies));
+			Toast.makeText(NowPlayingListActivity.this,
+					getResources().getString(R.string.network_failed),
+					Toast.LENGTH_SHORT).show();
 		}
-
 		/**
 		 * 响应点击 正在放映 ListView 事件，每个item详细信息，跳转到MovieSubjectView.class
 		 */
@@ -71,11 +91,16 @@ public class NowPlayingListActivity extends BaseListActivity {
 					startActivity(i);
 				} else if (position == 0) {
 					showListAsyncTask();
-				} else if (!flag && position != 0) {
-					Toast.makeText(NowPlayingListActivity.this, "数据加载失败！",
+				} else if (!flag && position != 0 && isConnecting()) {
+					Toast.makeText(NowPlayingListActivity.this,
+							getResources().getString(R.string.load_failed),
 							Toast.LENGTH_SHORT).show();
-
+				} else if (!flag && position != 0 && !isConnecting()) {
+					Toast.makeText(NowPlayingListActivity.this,
+							getResources().getString(R.string.network_failed),
+							Toast.LENGTH_SHORT).show();
 				}
+
 			}
 
 		});
@@ -107,7 +132,7 @@ public class NowPlayingListActivity extends BaseListActivity {
 
 	private View buildHeader() {
 		textview = new TextView(this);
-		textview.setText("刷新");
+		textview.setText(R.string.app_refresh);
 		textview.setTextColor(0xfffff7ff);
 		textview.setTextSize(18);
 
@@ -144,7 +169,7 @@ public class NowPlayingListActivity extends BaseListActivity {
 			super.onPostExecute(result);
 			closeProgressBar();
 			if(!flg){
-				textview.setText("刷新");
+				textview.setText(R.string.app_refresh);
 
 			}
 			if (result) {
@@ -154,8 +179,15 @@ public class NowPlayingListActivity extends BaseListActivity {
 				flag = true;
 				saveData();
 			} else {
-				Toast.makeText(NowPlayingListActivity.this, "数据加载失败！",
-						Toast.LENGTH_SHORT).show();
+				if (isConnecting()) {
+					Toast.makeText(NowPlayingListActivity.this,
+							getResources().getString(R.string.load_failed),
+							Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(NowPlayingListActivity.this,
+							getResources().getString(R.string.network_failed),
+							Toast.LENGTH_SHORT).show();
+				}
 				flag = false;
 				if (db_adapter.if_np_exists()) {
 					addListHeaderView();
@@ -175,7 +207,7 @@ public class NowPlayingListActivity extends BaseListActivity {
 			super.onPreExecute();
 			showProgressBar();
 			if(!flg){
-				textview.setText("");
+				textview.setText(R.string.nulls);
 			}
 
 		}
@@ -202,22 +234,46 @@ public class NowPlayingListActivity extends BaseListActivity {
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
+		if (movies.size() != 0) {
+			saveData();
+		}
 		db_adapter.close();
 		super.onDestroy();
 	}
-
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 
 		if (keyCode == KeyEvent.KEYCODE_MENU) {
 			super.openOptionsMenu();
 		}
-		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-			doExit();
-			return true;
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+			if (isExit == false) {
+				isExit = true;
+				Toast.makeText(this,
+						getResources().getString(R.string.app_quit),
+						Toast.LENGTH_SHORT).show();
+				if (!hasTask) {
+					tExit.schedule(task, 5000);
+				}
+			} else {
+				finish();
+				System.exit(0);
+			}
 		}
 		return true;
 	}
+
+	private static Boolean isExit = false;
+	private static Boolean hasTask = false;
+	Timer tExit = new Timer();
+	TimerTask task = new TimerTask() {
+		@Override
+		public void run() {
+			isExit = false;
+			hasTask = true;
+		}
+	};
 
 	@Override
 	public void onOptionsMenuClosed(Menu menu) {

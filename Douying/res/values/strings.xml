@@ -6,7 +6,7 @@
 	<string name="tab_search">搜索</string>
 	<string name="tab_best">经典</string>
 	<string name="tab_week">豆榜</string>
-	<string name="movie_search_hint"> 电影、导演、演员</string>
+	<string name="movie_search_hint">" 电影、导演、演员"</string>
 	<string name="loading">正在加载...</string>
 	<string name="view_comment">查看评论</string>
 	<string name="view_cinema">上映影院</string>
@@ -15,6 +15,10 @@
 	<string name="app_about">关于</string>
 	<string name="app_feedback">反馈</string>
 	<string name="app_refresh">刷新</string>
+	<string name="load_failed">数据加载失败!</string>
+	<string name="network_failed">无法连接到网络，请检查网络配置</string>
+	<string name="nulls"></string>
+	<string name="app_quit">再按一次退出程序</string>
 	<string name="app_introduce">豆影是一款基于豆瓣网的应用，本应用对豆瓣网上的电影信息进行整理，以简洁
 		明了的方式反馈给用户。用户可以通过应用得到的信息包括：热映(影院正在上映的电影)、豆榜(豆瓣网中新片的排行榜)、经典(豆瓣电
 		影250中随机抽取9部电影)、搜索。</string>
