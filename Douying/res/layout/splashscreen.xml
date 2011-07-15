@@ -3,5 +3,5 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:gravity="center|center" 
 	android:orientation="vertical"
-	android:background="@drawable/splash_screen">
+	android:background="@drawable/splash">
 </LinearLayout>

@@ -3,6 +3,6 @@
 <!-- Copyright (c) Mark Wyszomierski, 2010. -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:state_selected="true" android:drawable="@drawable/search" />
-	<item android:state_selected="false" android:drawable="@drawable/search" />
+	<item android:state_selected="true" android:drawable="@drawable/tap_imgbtn_search" />
+	<item android:state_selected="false" android:drawable="@drawable/tap_imgbtn_search" />
 </selector> 
