@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -139,12 +139,13 @@ public class NowPlayingListActivity extends BaseListActivity {
 		textview.setText(R.string.app_refresh);
 		textview.setTextColor(0xfffff7ff);
 		textview.setTextSize(18);
-
-		textview.setWidth(60);
-		textview.setHeight(60);
 		textview.setGravity(Gravity.CENTER);
 		textview.setBackgroundResource(R.drawable.listviewselector);
-
+		float fDip = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 45, getResources().getDisplayMetrics());  
+		int iDip = Math.round(fDip);  
+		textview.setWidth(iDip);
+		textview.setHeight(iDip);
+		
 		return (textview);
 	}
 
