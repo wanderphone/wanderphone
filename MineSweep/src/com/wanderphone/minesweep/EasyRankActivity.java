@@ -13,7 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 //import com.minesweep.R;
-//import com.mobclick.android.MobclickAgent;
+import com.mobclick.android.MobclickAgent;
 import com.wanderphone.minesweep.listAdapter.RankListAdapter;
 import com.wanderphone.minesweep.xmlparse.HttpClientConnector;
 import com.wanderphone.minesweep.xmlparse.RankInfo;
@@ -26,6 +26,8 @@ public class EasyRankActivity extends ListActivity{
 	public void onCreate(Bundle savedInstanceState)
 	{
 		 super.onCreate(savedInstanceState);
+			MobclickAgent.onError(this);
+
 		 setContentView(R.layout.easy_rank);
 		 
 		 dialog = new ProgressDialog(this);		 
@@ -82,11 +84,12 @@ public class EasyRankActivity extends ListActivity{
 			
 		}.execute();
 	}
+	
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-	//	MobclickAgent.onPause(this); 
+		MobclickAgent.onPause(this); 
 
 	}
 	
@@ -104,7 +107,7 @@ public class EasyRankActivity extends ListActivity{
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-	//	MobclickAgent.onResume(this);
+		MobclickAgent.onResume(this);
 	}
 }
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">  
     <item android:state_pressed="true"  
-        android:drawable="@drawable/button_multi_click" />  
+        android:drawable="@drawable/button_multi_clicks" />  
     <item android:state_focused="true"  
-        android:drawable="@drawable/button_multi_click" />  
-    <item android:drawable="@drawable/button_multi" />  
+        android:drawable="@drawable/button_multi_clicks" />  
+    <item android:drawable="@drawable/button_multis" />  
 </selector>

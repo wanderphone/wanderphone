@@ -2,7 +2,7 @@ package com.wanderphone.minesweep;
 
 import java.util.Random;
 
-//import com.mobclick.android.MobclickAgent;
+import com.mobclick.android.MobclickAgent;
 
 //import com.minesweep.R;
 
@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -80,6 +81,8 @@ public class FightActivity extends Activity
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);	
 		super.onCreate(savedInstanceState);
+		MobclickAgent.onError(this);
+
 		setContentView(R.layout.singleactivity);
 
 		Bundle bundle=this.getIntent().getExtras();
@@ -152,7 +155,7 @@ public class FightActivity extends Activity
 		stopTimer(); // stop if timer is running
 		txtTimer.setText("000"); // revert all text
 		txtMineCount.setText("000"); // revert mines count
-		btnSmile.setBackgroundResource(R.drawable.mine_start);
+		//btnSmile.setBackgroundResource(R.drawable.mine_start);
 		
 		// remove all rows from mineField TableLayout
 		mineField.removeAllViews();
@@ -429,7 +432,7 @@ public class FightActivity extends Activity
 		isGameOver = true; // mark game as over
 		stopTimer(); // stop timer
 		isTimerStarted = false;
-		btnSmile.setBackgroundResource(R.drawable.mine_start);
+		//btnSmile.setBackgroundResource(R.drawable.mine_start);
 
 		// show all mines
 		// disable all blocks
@@ -655,11 +658,19 @@ public class FightActivity extends Activity
 		dialog.setDuration(milliseconds);
 		dialog.show();
 	}
+	public void onConfigurationChanged(Configuration newConfig) { 
+        super.onConfigurationChanged(newConfig); 
+        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) { 
+                // land do nothing is ok 
+        } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) { 
+                // port do nothing is ok 
+        } 
+}
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-	//	MobclickAgent.onPause(this); 
+		MobclickAgent.onPause(this); 
 
 	}
 
@@ -667,7 +678,7 @@ public class FightActivity extends Activity
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-	//	MobclickAgent.onResume(this);
+		MobclickAgent.onResume(this);
 	}
 
 

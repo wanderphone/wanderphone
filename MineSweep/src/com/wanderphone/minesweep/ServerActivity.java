@@ -2,7 +2,7 @@ package com.wanderphone.minesweep;
 
 import java.util.Random;
 
-//import com.mobclick.android.MobclickAgent;
+import com.mobclick.android.MobclickAgent;
 
 //import com.minesweep.R;
 
@@ -12,12 +12,14 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -45,7 +47,7 @@ public class ServerActivity extends Activity {
 	private ImageButton btnSmile;
 	private TableLayout mineField; // table layout to add mines to
 	private Block blocks[][]; // blocks for mine field	
-	private int blockDimension = 50; // width of each block
+	private int blockDimension ; // width of each block
 	private int numberOfRowsInMineField=13 ;
 	private int numberOfColumnsInMineField=14 ;
 	private int totalNumberOfMines=41 ;
@@ -95,10 +97,41 @@ public class ServerActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		MobclickAgent.onError(this);
+
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.serveractivity);
+		DisplayMetrics metrics =new DisplayMetrics(); 
+		getWindowManager().getDefaultDisplay().getMetrics(metrics); 
+		int width=metrics.widthPixels;
+		int height=metrics.heightPixels;
+		//根据不同分辨率定义不同大小格子
+		if((width==320&&height==480)||(width==480&&height==320))
+		{
+			blockDimension=35;
+		}
+		if((width==854&&height==480)||(width==480&&height==854))
+		{
+			blockDimension=50;
+		}
+		if((width==800&&height==480)||(width==480&&height==800))
+		{
+			blockDimension=48;
+		}
+		if((width==240&&height==400)||(width==400&&height==240))
+		{
+			blockDimension=25;
+		}
+		if((width==240&&height==432)||(width==432&&height==240))
+		{
+			blockDimension=25;
+		}
+		if((width==240&&height==320)||(width==320&&height==240))
+		{
+			blockDimension=24;
+		}
 		server_tv1=(TextView)findViewById(R.id.server_tv1);
 		server_bt1=(Button)findViewById(R.id.server_bt1);
 		server_bt2=(Button)findViewById(R.id.server_bt2);
@@ -177,7 +210,6 @@ public class ServerActivity extends Activity {
 	    }
 	 public synchronized void onResume() {
 	        super.onResume();
-			//MobclickAgent.onResume(this);
 
 
 	        // Performing this check in onResume() covers the case in which BT was
@@ -190,10 +222,20 @@ public class ServerActivity extends Activity {
 	              mChatService.start(); 
 	            }
 	        }
+			MobclickAgent.onResume(this);
+
 	    }
+		public void onConfigurationChanged(Configuration newConfig) { 
+	        super.onConfigurationChanged(newConfig); 
+	        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) { 
+	                // land do nothing is ok 
+	        } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) { 
+	                // port do nothing is ok 
+	        } 
+	}
 	 public synchronized void onPause() {
 	        super.onPause();
-			//MobclickAgent.onPause(this);
+			MobclickAgent.onPause(this);
 
 	    }
 

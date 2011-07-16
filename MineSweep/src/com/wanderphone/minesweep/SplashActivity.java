@@ -5,6 +5,7 @@ import java.util.UUID;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,7 +16,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 //import com.minesweep.R;
-//import com.mobclick.android.MobclickAgent;
+import com.mobclick.android.MobclickAgent;
 import com.wanderphone.minesweep.xmlparse.HttpClientConnector;
 import com.wanderphone.minesweep.xmlparse.SplashMessage;
 import com.wanderphone.minesweep.xmlparse.SplashMessageParse;
@@ -48,6 +49,8 @@ public class SplashActivity extends Activity {
 		// String splashMessageParameter =
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		MobclickAgent.onError(this);
+
 		// 去标题栏、状态栏
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -145,12 +148,19 @@ public class SplashActivity extends Activity {
 
 		}.execute();
 	}
-
+	public void onConfigurationChanged(Configuration newConfig) { 
+        super.onConfigurationChanged(newConfig); 
+        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) { 
+                // land do nothing is ok 
+        } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) { 
+                // port do nothing is ok 
+        } 
+}
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		//MobclickAgent.onPause(SplashActivity.this);
+		MobclickAgent.onPause(this);
 
 	}
 
@@ -158,6 +168,6 @@ public class SplashActivity extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		//MobclickAgent.onResume(SplashActivity.this);
+		MobclickAgent.onResume(this);
 	}
 }

@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -44,7 +45,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 //import com.minesweep.R;
-//import com.mobclick.android.MobclickAgent;
+import com.mobclick.android.MobclickAgent;
 import com.wanderphone.minesweep.xmlparse.GameMessage;
 import com.wanderphone.minesweep.xmlparse.GameMessageParse;
 import com.wanderphone.minesweep.xmlparse.HttpClientConnector;
@@ -85,7 +86,7 @@ public class SingleActivity extends Activity {
 	private TableLayout mineField; // table layout to add mines to
 
 	private Block blocks[][]; // blocks for mine field
-	private int blockDimension = 50; // width of each block
+	private int blockDimension ; // width of each block
 	// private int blockPadding = 0; // padding between blocks
 
 	private int numberOfRowsInMineField;
@@ -108,7 +109,40 @@ public class SingleActivity extends Activity {
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
+		MobclickAgent.onError(this);
+
 		setContentView(R.layout.singleactivity);
+		
+		DisplayMetrics metrics =new DisplayMetrics(); 
+		getWindowManager().getDefaultDisplay().getMetrics(metrics); 
+		int width=metrics.widthPixels;
+		int height=metrics.heightPixels;
+		//根据不同分辨率定义不同大小格子
+		if((width==320&&height==480)||(width==480&&height==320))
+		{
+			blockDimension=35;
+		}
+		if((width==854&&height==480)||(width==480&&height==854))
+		{
+			blockDimension=50;
+		}
+		if((width==800&&height==480)||(width==480&&height==800))
+		{
+			blockDimension=48;
+		}
+		if((width==240&&height==400)||(width==400&&height==240))
+		{
+			blockDimension=25;
+		}
+		if((width==240&&height==432)||(width==432&&height==240))
+		{
+			blockDimension=25;
+		}
+		if((width==240&&height==320)||(width==320&&height==240))
+		{
+			blockDimension=24;
+		}
+
 		// 数据库相关
 		myToDoDB = new ToDoDB(this);
 		//震动
@@ -1218,7 +1252,7 @@ public class SingleActivity extends Activity {
 		// TODO Auto-generated method stub
 		myToDoDB.close();
 		super.onPause();
-		//MobclickAgent.onPause(this);
+		MobclickAgent.onPause(this);
 
 	}
 
@@ -1227,7 +1261,7 @@ public class SingleActivity extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		//MobclickAgent.onResume(this);
+		MobclickAgent.onResume(this);
 
 	}
 

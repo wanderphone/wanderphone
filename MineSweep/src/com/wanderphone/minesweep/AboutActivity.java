@@ -3,18 +3,20 @@ package com.wanderphone.minesweep;
 //import com.minesweep.R;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-//import com.mobclick.android.MobclickAgent;
+import com.mobclick.android.MobclickAgent;
 
 public class AboutActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MobclickAgent.onError(this);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -54,19 +56,26 @@ public class AboutActivity extends Activity {
         feedBackTitle.setText(R.string.feedBack);
         feedBackEnglish.setText(R.string.questionEmail);
     }
-
+	public void onConfigurationChanged(Configuration newConfig) { 
+        super.onConfigurationChanged(newConfig); 
+        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) { 
+                // land do nothing is ok 
+        } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) { 
+                // port do nothing is ok 
+        } 
+}
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		//MobclickAgent.onPause(this); 
+		MobclickAgent.onPause(this); 
 	}
 
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		//MobclickAgent.onResume(this);
+		MobclickAgent.onResume(this);
 	}
     
 }

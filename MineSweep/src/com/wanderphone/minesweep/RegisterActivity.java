@@ -4,7 +4,7 @@ import java.net.URLEncoder;
 import java.util.UUID;
 
 //import com.minesweep.R;
-//import com.mobclick.android.MobclickAgent;
+import com.mobclick.android.MobclickAgent;
 import com.wanderphone.minesweep.xmlparse.HttpClientConnector;
 import com.wanderphone.minesweep.xmlparse.RegisterReturnMessage;
 import com.wanderphone.minesweep.xmlparse.RegisterReturnMessageParse;
@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.PorterDuff;
 
 public class RegisterActivity extends Activity {
@@ -53,6 +54,8 @@ public class RegisterActivity extends Activity {
 		uniqueId = deviceUuid.toString();
 
 		super.onCreate(savedInstanceState);
+		MobclickAgent.onError(this);
+
 		setContentView(R.layout.register);
 
 		usernameEditText = (EditText) findViewById(R.id.usernameEditText);
@@ -119,11 +122,19 @@ public class RegisterActivity extends Activity {
 			}
 		});
 	}
+	public void onConfigurationChanged(Configuration newConfig) { 
+        super.onConfigurationChanged(newConfig); 
+        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) { 
+                // land do nothing is ok 
+        } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) { 
+                // port do nothing is ok 
+        } 
+}
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		//MobclickAgent.onPause(this);
+		MobclickAgent.onPause(this);
 
 	}
 
@@ -131,6 +142,6 @@ public class RegisterActivity extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		//MobclickAgent.onResume(this);
+		MobclickAgent.onResume(this);
 	}
 }

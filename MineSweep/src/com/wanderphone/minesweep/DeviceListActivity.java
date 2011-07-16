@@ -18,7 +18,7 @@ package com.wanderphone.minesweep;
 
 import java.util.Set;
 
-//import com.mobclick.android.MobclickAgent;
+import com.mobclick.android.MobclickAgent;
 
 //import com.minesweep.;
 
@@ -29,6 +29,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -63,6 +64,7 @@ public class DeviceListActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+		MobclickAgent.onError(this);
 
         // Setup the window
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
@@ -202,11 +204,19 @@ public class DeviceListActivity extends Activity {
             }
         }
     };
+	public void onConfigurationChanged(Configuration newConfig) { 
+        super.onConfigurationChanged(newConfig); 
+        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) { 
+                // land do nothing is ok 
+        } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) { 
+                // port do nothing is ok 
+        } 
+}
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		//MobclickAgent.onPause(this); 
+		MobclickAgent.onPause(this); 
 
 	}
 
@@ -214,6 +224,6 @@ public class DeviceListActivity extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		//MobclickAgent.onResume(this);
+		MobclickAgent.onResume(this);
 	}
 }

@@ -1,9 +1,10 @@
 package com.wanderphone.minesweep;
-//import com.mobclick.android.MobclickAgent;
+import com.mobclick.android.MobclickAgent;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -21,6 +22,8 @@ public class SetActivity extends PreferenceActivity  {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		MobclickAgent.onError(SetActivity.this);
+
 		//requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -51,7 +54,7 @@ public class SetActivity extends PreferenceActivity  {
 		}
 		if(preference.getKey().equals("cc"))
 		{
-			//MobclickAgent.openFeedbackActivity(this); 
+			MobclickAgent.openFeedbackActivity(SetActivity.this); 
 			
 		}
 		if(preference.getKey().equals("dd"))
@@ -79,11 +82,19 @@ public class SetActivity extends PreferenceActivity  {
 		}
 		return false;
 	}
+	public void onConfigurationChanged(Configuration newConfig) { 
+        super.onConfigurationChanged(newConfig); 
+        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) { 
+                // land do nothing is ok 
+        } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) { 
+                // port do nothing is ok 
+        } 
+}
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		//MobclickAgent.onPause(this);
+		MobclickAgent.onPause(SetActivity.this);
 
 	}
 
@@ -91,7 +102,7 @@ public class SetActivity extends PreferenceActivity  {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		//MobclickAgent.onResume(this);
+		MobclickAgent.onResume(SetActivity.this);
 	}
  
 

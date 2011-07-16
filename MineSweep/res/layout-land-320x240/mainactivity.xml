@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:background="@drawable/menubk_landscape">
+	
+	<ImageButton android:id="@+id/bt_single" android:layout_width="140dip"
+		android:layout_height="40dip" android:layout_gravity="right"
+		android:layout_marginTop="16dip" android:layout_marginRight="20dip" android:text="@string/bt_single"
+		android:textSize="20sp" android:textColor="#7D26CD" android:background="@drawable/single_button"/>
+	<ImageButton android:id="@+id/bt_multiple" android:layout_width="140dip"
+		android:layout_height="40dip" android:layout_gravity="right" android:layout_marginRight="20dip"
+		android:layout_marginTop="8dip" android:text="@string/bt_multiple"
+		android:textSize="20sp" android:textColor="#7D26CD" android:background="@drawable/multi_button"/>
+	<ImageButton android:id="@+id/bt_rank" android:layout_width="140dip"
+		android:layout_height="40dip" android:layout_gravity="right" android:layout_marginRight="20dip"
+		android:layout_marginTop="8dip" android:text="@string/bt_rank"
+		android:textSize="20sp" android:textColor="#7D26CD" android:background="@drawable/rank_button"/>
+	<ImageButton android:id="@+id/bt_set" android:layout_width="140dip"
+		android:layout_height="40dip" android:layout_gravity="right" android:layout_marginRight="20dip"
+		android:layout_marginTop="8dip" 
+	    android:background="@drawable/set_button"/>
+	<ImageButton android:id="@+id/bt_help" android:layout_width="140dip"
+		android:layout_height="40dip" android:layout_gravity="right" android:layout_marginRight="20dip"
+		android:layout_marginTop="8dip" android:text="@string/bt_help"
+		android:textSize="20sp" android:textColor="#7D26CD" android:background="@drawable/help_button"/>
+	<ImageButton android:id="@+id/bt_about" android:layout_width="140dip"
+		android:layout_height="40dip" android:layout_gravity="right" android:layout_marginRight="20dip"
+		android:layout_marginTop="8dip" android:text="@string/bt_about"
+		android:textSize="20sp" android:textColor="#7D26CD" android:background="@drawable/about_button"/>
+	
+</LinearLayout>

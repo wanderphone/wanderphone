@@ -2,7 +2,7 @@ package com.wanderphone.minesweep;
 
 //import com.minesweep.R;
 
-//import com.mobclick.android.MobclickAgent;
+import com.mobclick.android.MobclickAgent;
 
 import android.app.TabActivity;
 import android.content.Intent;
@@ -32,6 +32,8 @@ public class TabRankActivity extends TabActivity {
 	/** Called when the activity is first created. */
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
+		MobclickAgent.onError(this);
+
     	// 全屏显示
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -109,7 +111,7 @@ public class TabRankActivity extends TabActivity {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		//MobclickAgent.onPause(this);
+		MobclickAgent.onPause(this);
 
 	}
 	
@@ -127,6 +129,6 @@ public class TabRankActivity extends TabActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		//MobclickAgent.onResume(this);
+		MobclickAgent.onResume(this);
 	}
 }
