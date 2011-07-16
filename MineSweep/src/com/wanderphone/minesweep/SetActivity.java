@@ -1,4 +1,6 @@
 package com.wanderphone.minesweep;
+//import com.mobclick.android.MobclickAgent;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -49,7 +51,7 @@ public class SetActivity extends PreferenceActivity  {
 		}
 		if(preference.getKey().equals("cc"))
 		{
-			
+			//MobclickAgent.openFeedbackActivity(this); 
 			
 		}
 		if(preference.getKey().equals("dd"))
@@ -76,6 +78,20 @@ public class SetActivity extends PreferenceActivity  {
             Log.v("!!!!", vflag+"");
 		}
 		return false;
+	}
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		//MobclickAgent.onPause(this);
+
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		//MobclickAgent.onResume(this);
 	}
  
 

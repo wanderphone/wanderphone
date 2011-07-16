@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bk"
+    >
+<TextView
+	android:id="@+id/server_tv1"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:gravity="center_horizontal"
+    android:layout_marginTop="20dip"
+    android:text="@string/waiting"
+    android:textColor="#CD2626"
+    android:textSize="50sp"
+    />
+
+<Button
+	android:id="@+id/server_bt1"
+	android:layout_width="150dip"
+	android:layout_height="wrap_content"
+	android:layout_alignParentBottom="true"
+	android:layout_alignParentLeft="true"
+	android:layout_marginLeft="10dip"
+	android:layout_marginBottom="15dip"
+	android:text="@string/bt_start"
+	android:enabled="false"
+	android:textColor="#7D26CD"
+	/>
+<Button
+	android:id="@+id/server_bt2"
+	android:layout_width="150dip"
+	android:layout_height="wrap_content"
+	android:layout_alignParentBottom="true"
+	android:layout_alignParentRight="true"
+	android:layout_marginRight="10dip"
+	android:layout_marginBottom="15dip"
+	android:text="@string/bt_show"
+	android:textColor="#7D26CD"
+	/>
+</RelativeLayout>  

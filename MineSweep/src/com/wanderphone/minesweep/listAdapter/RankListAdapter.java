@@ -45,7 +45,7 @@ public class RankListAdapter extends BaseAdapter{
 		TextView txtTime = (TextView)view.findViewById(R.id.time);
 		txtRankInfo.setText(rankInfo.getRank());
 		txtUsername.setText(rankInfo.getUsername());
-		txtTime.setText(rankInfo.getTime() + "s");
+		txtTime.setText(rankInfo.getTime());
 		return view;
 	}
 }

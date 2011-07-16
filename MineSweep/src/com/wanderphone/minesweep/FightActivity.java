@@ -2,6 +2,8 @@ package com.wanderphone.minesweep;
 
 import java.util.Random;
 
+//import com.mobclick.android.MobclickAgent;
+
 //import com.minesweep.R;
 
 import android.app.Activity;
@@ -653,7 +655,20 @@ public class FightActivity extends Activity
 		dialog.setDuration(milliseconds);
 		dialog.show();
 	}
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+	//	MobclickAgent.onPause(this); 
 
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+	//	MobclickAgent.onResume(this);
+	}
 
 
 }

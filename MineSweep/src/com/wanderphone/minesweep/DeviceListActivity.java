@@ -18,6 +18,8 @@ package com.wanderphone.minesweep;
 
 import java.util.Set;
 
+//import com.mobclick.android.MobclickAgent;
+
 //import com.minesweep.;
 
 import android.app.Activity;
@@ -200,5 +202,18 @@ public class DeviceListActivity extends Activity {
             }
         }
     };
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		//MobclickAgent.onPause(this); 
 
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		//MobclickAgent.onResume(this);
+	}
 }

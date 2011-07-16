@@ -2,8 +2,11 @@ package com.wanderphone.minesweep;
 
 //import com.minesweep.R;
 
+//import com.mobclick.android.MobclickAgent;
+
 import android.app.TabActivity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -101,5 +104,29 @@ public class TabRankActivity extends TabActivity {
 		}
 		
 		return super.dispatchTouchEvent(event);		
+	}
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		//MobclickAgent.onPause(this);
+
+	}
+	
+	@Override 
+    public void onConfigurationChanged(Configuration newConfig) { 
+            super.onConfigurationChanged(newConfig); 
+            if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) { 
+                    // land do nothing is ok 
+            } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) { 
+                    // port do nothing is ok 
+            } 
+    }
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		//MobclickAgent.onResume(this);
 	}
 }

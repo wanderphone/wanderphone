@@ -14,6 +14,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.media.AudioManager;
@@ -43,6 +44,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 //import com.minesweep.R;
+//import com.mobclick.android.MobclickAgent;
 import com.wanderphone.minesweep.xmlparse.GameMessage;
 import com.wanderphone.minesweep.xmlparse.GameMessageParse;
 import com.wanderphone.minesweep.xmlparse.HttpClientConnector;
@@ -61,6 +63,7 @@ public class SingleActivity extends Activity {
 	private SharedPreferences sharedPreferences;
 	private Boolean soundflag;
 	private Boolean vibrateflag;
+	private Boolean dialogflag=true;
 	private Boolean ibflag=false;
 	private int gameflag;
 	//震动
@@ -82,7 +85,7 @@ public class SingleActivity extends Activity {
 	private TableLayout mineField; // table layout to add mines to
 
 	private Block blocks[][]; // blocks for mine field
-	private int blockDimension = 36; // width of each block
+	private int blockDimension = 50; // width of each block
 	// private int blockPadding = 0; // padding between blocks
 
 	private int numberOfRowsInMineField;
@@ -153,6 +156,7 @@ public class SingleActivity extends Activity {
 			public void onClick(View view) {
 				endExistingGame();
 				startNewGame();
+				dialogflag=true;
 				btnSmile.setBackgroundResource(R.drawable.smiles_selector);
 				imflag.setBackgroundResource(R.drawable.mine_flag);
 				ibflag=false;
@@ -298,6 +302,16 @@ public class SingleActivity extends Activity {
     	  
 		return true; 
     }
+	@Override 
+    public void onConfigurationChanged(Configuration newConfig) { 
+            super.onConfigurationChanged(newConfig); 
+            if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) { 
+                    // land do nothing is ok 
+            } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) { 
+                    // port do nothing is ok 
+            } 
+    }
+
 	/***************************************************************  
 	  * Function:     initSounds();  
 	  * Parameters:   null  
@@ -891,8 +905,10 @@ public class SingleActivity extends Activity {
 						Log.v("rankNow", rankNow);
 						if (gameMessage != null && !rankNow.equals("no")) {
 							 //Dialog dialog = new Dialog(SingleActivity.this, R.style.dialog);
-							 Dialog dialog = new AlertDialog.Builder(SingleActivity.this)
-									.setIcon(R.drawable.cool)
+							 if(dialogflag)
+							 {
+								 Dialog dialog = new AlertDialog.Builder(SingleActivity.this)
+									.setIcon(R.drawable.smallcool)
 									.setTitle("congratulation")
 									.setMessage(getResources().getString(R.string.string_this_score) + gameMessage.getTimeThis() + getResources().getString(R.string.string_all_country)
 													+ gameMessage.getRankThis() + "\n"
@@ -903,21 +919,25 @@ public class SingleActivity extends Activity {
 										     // TODO Auto-generated method stub
 												//btnSmile.setBackgroundResource(R.drawable.ib_forward);
 										     }
-										 }).setNegativeButton(R.string.select_level_again, new DialogInterface.OnClickListener(){
+										 })/*.setNegativeButton(R.string.select_level_again, new DialogInterface.OnClickListener(){
 											 public void onClick(DialogInterface dialog, int which) {
 											     // TODO Auto-generated method stub
 												 Intent intent = new Intent();
 													intent.setClass(SingleActivity.this, SelectActivity.class);
 													startActivity(intent);
 													SingleActivity.this.finish();
-											     }
-											}).create();
+											     
+												 }
+											})*/.create();
+							 
 							dialog.show();
+							dialogflag=false;
+							 }
+							 
 						}
 					}
 				}else{
-					Toast.makeText(SingleActivity.this, "Congratulations!", Toast.LENGTH_SHORT)
-								.show();
+					showDialog(getResources().getString(R.string.win), 1000, true, false);
 				}
 			}
 			
@@ -984,6 +1004,7 @@ public class SingleActivity extends Activity {
 
 		// trigger mine
 		blocks[currentRow][currentColumn].triggerMine();
+		showDialog(getResources().getString(R.string.lose), 1000, false, false);
 	}
 
 	private void setMines(int currentRow, int currentColumn) {
@@ -1121,11 +1142,11 @@ public class SingleActivity extends Activity {
 		LinearLayout dialogView = (LinearLayout) dialog.getView();
 		ImageView coolImage = new ImageView(getApplicationContext());
 		if (useSmileImage) {
-			coolImage.setImageResource(R.drawable.cool);
+			coolImage.setImageResource(R.drawable.smallsmile);
 		} else if (useCoolImage) {
-			coolImage.setImageResource(R.drawable.cool);
+			coolImage.setImageResource(R.drawable.smallcool);
 		} else {
-			coolImage.setImageResource(R.drawable.sad);
+			coolImage.setImageResource(R.drawable.smallsad);
 		}
 		dialogView.addView(coolImage, 0);
 		dialog.setDuration(milliseconds);
@@ -1189,10 +1210,7 @@ public class SingleActivity extends Activity {
 			}
 			break;
 		}
-		showDialog(
-				"congratulations! You create a new record: "
-						+ Integer.toString(secondsPassed) + " seconds!", 1000,
-				false, true);
+		
 	}
 
 	// Activity暂停时关闭数据库操作
@@ -1200,6 +1218,8 @@ public class SingleActivity extends Activity {
 		// TODO Auto-generated method stub
 		myToDoDB.close();
 		super.onPause();
+		//MobclickAgent.onPause(this);
+
 	}
 
 	// Activity onResume时加载数据库
@@ -1207,5 +1227,8 @@ public class SingleActivity extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		//MobclickAgent.onResume(this);
+
 	}
+
 }

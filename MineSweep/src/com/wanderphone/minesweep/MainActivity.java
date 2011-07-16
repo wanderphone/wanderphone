@@ -2,6 +2,8 @@ package com.wanderphone.minesweep;
 
 //import com.minesweep.R;
 
+//import com.mobclick.android.MobclickAgent;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -194,5 +196,19 @@ public class MainActivity extends Activity {
 					}
 
 				}).show();
+	}
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		//MobclickAgent.onPause(this);
+
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		//MobclickAgent.onResume(this);
 	}
 }

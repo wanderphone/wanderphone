@@ -8,6 +8,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+//import com.mobclick.android.MobclickAgent;
+
 public class AboutActivity extends Activity {
 
     @Override
@@ -52,4 +54,19 @@ public class AboutActivity extends Activity {
         feedBackTitle.setText(R.string.feedBack);
         feedBackEnglish.setText(R.string.questionEmail);
     }
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		//MobclickAgent.onPause(this); 
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		//MobclickAgent.onResume(this);
+	}
+    
 }

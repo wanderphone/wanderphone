@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bk"
+    >
+<TextView
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:layout_marginTop="20dip"
+    android:text="@string/play_with_human"
+    android:textColor="#CD2626"
+    android:textSize="25sp"
+    />
+<ImageButton
+	android:id="@+id/server_bt1"
+	android:layout_width="180dip"
+	android:layout_height="40dip"
+	android:layout_gravity="center_horizontal"
+	android:layout_marginTop="20dip"
+	android:text="@string/server"
+	android:textSize="20sp"
+	android:textColor="#7D26CD"
+	android:background="@drawable/create_button"
+	/>
+<ImageButton
+	android:id="@+id/server_bt2"
+	android:layout_width="180dip"
+	android:layout_height="40dip"
+	android:layout_gravity="center_horizontal"
+	android:layout_marginTop="10dip"
+	android:text="@string/client"
+	android:textSize="20sp"
+	android:textColor="#7D26CD"
+	android:background="@drawable/in_button"
+	/>
+<ImageButton
+	android:id="@+id/server_bt3"
+	android:layout_width="180dip"
+	android:layout_height="40dip"
+	android:layout_gravity="center_horizontal"
+	android:layout_marginTop="10dip"
+	android:text="@string/server_back"
+	android:textSize="20sp"
+	android:textColor="#7D26CD"
+	android:background="@drawable/back_button"
+	/>
+</LinearLayout>    

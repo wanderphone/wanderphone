@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 //import com.minesweep.R;
+//import com.mobclick.android.MobclickAgent;
 import com.wanderphone.minesweep.listAdapter.RankListAdapter;
 import com.wanderphone.minesweep.xmlparse.HttpClientConnector;
 import com.wanderphone.minesweep.xmlparse.RankInfo;
@@ -79,6 +81,30 @@ public class EasyRankActivity extends ListActivity{
 			}
 			
 		}.execute();
+	}
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+	//	MobclickAgent.onPause(this); 
+
+	}
+	
+	@Override 
+    public void onConfigurationChanged(Configuration newConfig) { 
+            super.onConfigurationChanged(newConfig); 
+            if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) { 
+                    // land do nothing is ok 
+            } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) { 
+                    // port do nothing is ok 
+            } 
+    }
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+	//	MobclickAgent.onResume(this);
 	}
 }
 

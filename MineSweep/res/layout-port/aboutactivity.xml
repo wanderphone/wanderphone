@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:orientation="vertical"
+  android:background="@drawable/bk">
+  	<LinearLayout android:gravity="center_vertical"
+		android:orientation="horizontal" android:id="@+id/title_bar"
+		android:layout_width="fill_parent"
+		android:layout_height="44dip">
+		
+		<!-- <LinearLayout android:gravity="center_vertical"
+			android:layout_width="0.0dip" android:layout_height="wrap_content"
+			android:layout_weight="1.0"> -->
+			<TextView android:textSize="30.0sp" 
+			    android:textColor="#CD2626"
+				android:textStyle="bold"
+				android:id="@+id/myTitle" android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:layout_marginLeft="5.0dip"
+					android:gravity="center"
+				/>
+	</LinearLayout>
+	<RelativeLayout android:id="@+id/design"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+		<TextView android:id="@+id/designTitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="15sp"
+			android:textColor="#FF7F00"
+			/>
+		<TextView android:id="@+id/teamName"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/designTitle"
+			android:textSize="15sp"
+			android:textColor="#FF7F00"/>
+	</RelativeLayout>
+	<RelativeLayout android:id="@+id/information"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+		<TextView android:id="@+id/informationTitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="15sp"
+			android:textColor="#FF7F00"/>
+		<TextView android:id="@+id/informationWeb"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:autoLink="all"
+			android:layout_toRightOf="@id/informationTitle"
+			android:textColor="#FF7F00"/>
+	</RelativeLayout>
+	
+	<RelativeLayout android:id="@+id/question"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+		<TextView android:id="@+id/questionTitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="15sp"
+			android:textColor="#FF7F00"/>
+		<TextView android:id="@+id/questionEmail"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/questionTitle"
+			android:textSize="15sp"
+			android:textColor="#FF7F00"/>
+	</RelativeLayout>
+	<RelativeLayout android:id="@+id/attention"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+		<TextView android:id="@+id/attentionTitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="15sp"
+			android:textColor="#FF7F00"/>
+		<TextView android:id="@+id/sinaBlog"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/attentionTitle"
+			android:textSize="15sp"
+			android:textColor="#FF7F00"/>
+		<TextView android:id="@+id/qqBlog"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/sinaBlog"
+			android:textSize="15sp"
+			android:textColor="#FF7F00"/>
+	</RelativeLayout>
+	
+	<RelativeLayout android:id="@+id/englishAbout"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:paddingTop="40dip">
+		<TextView android:id="@+id/developmentTitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="15sp"
+			android:textColor="#FF7F00"/>
+		<TextView android:id="@+id/teamEnglishName"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/developmentTitle"
+			android:textSize="15sp"
+			android:textColor="#FF7F00"/>
+	</RelativeLayout>
+	<RelativeLayout android:id="@+id/englishAbout"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">	
+		<TextView android:id="@+id/moreInformationTitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#FF7F00"/>
+		<TextView android:id="@+id/informationEnglish"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:autoLink="all"
+			android:layout_toRightOf="@id/moreInformationTitle"
+			android:textColor="#FF7F00"/>
+	</RelativeLayout>
+	<RelativeLayout android:id="@+id/englishAbout"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+		<TextView android:id="@+id/feedbackTitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="15sp"
+			android:textColor="#FF7F00"/>
+		<TextView android:id="@+id/feedbackEnglish"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/feedbackTitle"
+			android:textSize="15sp"
+			android:textColor="#FF7F00"/>
+	</RelativeLayout>		
+</LinearLayout>

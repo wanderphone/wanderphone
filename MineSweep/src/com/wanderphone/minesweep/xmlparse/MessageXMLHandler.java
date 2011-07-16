@@ -8,13 +8,14 @@ import org.xml.sax.helpers.DefaultHandler;
 import android.util.Log;
 
 public class MessageXMLHandler extends DefaultHandler {
-	
+	int flag = 0;
 	private String preTAG;
 	SplashMessage splashMessage;
 	GameMessage gameMessage;
 	RegisterReturnMessage registerReturnMessage;
 	List<RankInfo> rankInfos;
 	RankInfo rankInfo;
+	RankInfo title = new RankInfo();
 
 	// 记录出现次数
 	int findCount = 0;
@@ -171,8 +172,16 @@ public class MessageXMLHandler extends DefaultHandler {
 			{
 				rankInfo .setRank(data);
 				Log.v("Rank", data);
+				if(flag == 0)
+				{
+					title.setRank("排行");
+					title.setUsername("用户名");
+					title.setTime("时间(s)");
+					rankInfos.add(title);
+				}
 				rankInfos.add(rankInfo);
 				Log.v("rankInfo", rankInfos.get(0).getUsername());
+				flag++;
 			}
 			
 			else if(preTAG.equals("UserName"))

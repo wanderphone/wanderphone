@@ -2,6 +2,8 @@ package com.wanderphone.minesweep;
 
 import java.util.Random;
 
+//import com.mobclick.android.MobclickAgent;
+
 //import com.minesweep.R;
 
 import android.app.Activity;
@@ -52,7 +54,7 @@ public class CilentActivity extends Activity {
 	private ImageButton btnSmile;
 	private TableLayout mineField; // table layout to add mines to
 	private Block blocks[][]; // blocks for mine field
-	private int blockDimension = 36; // width of each block
+	private int blockDimension = 50; // width of each block
 	private int numberOfRowsInMineField = 13;
 	private int numberOfColumnsInMineField = 14;
 	private int totalNumberOfMines = 41;
@@ -150,6 +152,7 @@ public class CilentActivity extends Activity {
 
 	public synchronized void onResume() {
 		super.onResume();
+		//MobclickAgent.onResume(this);
 
 		// Performing this check in onResume() covers the case in which BT was
 		// not enabled during onStart(), so we were paused to enable it...
@@ -167,6 +170,7 @@ public class CilentActivity extends Activity {
 
 	public synchronized void onPause() {
 		super.onPause();
+		//MobclickAgent.onPause(this); 
 
 	}
 
@@ -360,7 +364,7 @@ public class CilentActivity extends Activity {
 					txtTimer.setTypeface(lcdFont);
 					txtTimer2.setTypeface(lcdFont);
 					btnSmile = (ImageButton) findViewById(R.id.Smiley);
-					btnSmile.setBackgroundResource(R.drawable.mine_cilent);
+					//btnSmile.setBackgroundResource(R.drawable.mine_cilent);
 					btnSmile.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View view) {
@@ -580,7 +584,7 @@ public class CilentActivity extends Activity {
 							}
 							sendMessage(Uncover);
 							if (toast) {
-								showDialog(getResources().getString(R.string.change_turn), 500, true, false);
+								showDialog(getResources().getString(R.string.wait_other), 500, true, false);
 							}
 
 						}

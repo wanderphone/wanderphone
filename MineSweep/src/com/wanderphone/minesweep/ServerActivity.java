@@ -2,6 +2,8 @@ package com.wanderphone.minesweep;
 
 import java.util.Random;
 
+//import com.mobclick.android.MobclickAgent;
+
 //import com.minesweep.R;
 
 
@@ -43,7 +45,7 @@ public class ServerActivity extends Activity {
 	private ImageButton btnSmile;
 	private TableLayout mineField; // table layout to add mines to
 	private Block blocks[][]; // blocks for mine field	
-	private int blockDimension = 36; // width of each block
+	private int blockDimension = 50; // width of each block
 	private int numberOfRowsInMineField=13 ;
 	private int numberOfColumnsInMineField=14 ;
 	private int totalNumberOfMines=41 ;
@@ -175,7 +177,8 @@ public class ServerActivity extends Activity {
 	    }
 	 public synchronized void onResume() {
 	        super.onResume();
-	       
+			//MobclickAgent.onResume(this);
+
 
 	        // Performing this check in onResume() covers the case in which BT was
 	        // not enabled during onStart(), so we were paused to enable it...
@@ -190,7 +193,8 @@ public class ServerActivity extends Activity {
 	    }
 	 public synchronized void onPause() {
 	        super.onPause();
-	        
+			//MobclickAgent.onPause(this);
+
 	    }
 
 	    @Override
@@ -569,7 +573,7 @@ public class ServerActivity extends Activity {
 								
 								if(toast)
 								{
-									showDialog(getResources().getString(R.string.change_turn), 500, true, false);
+									showDialog(getResources().getString(R.string.wait_other), 500, true, false);
 								}
 								
 								sendMessage(Uncover);
@@ -668,7 +672,7 @@ public class ServerActivity extends Activity {
 				}
 			}
 
-			showDialog(getResources().getString(R.string.lose), 1000, true, false);
+			showDialog(getResources().getString(R.string.lose), 1000, false, false);
 
 		}
 
@@ -792,18 +796,19 @@ public class ServerActivity extends Activity {
 			ImageView coolImage = new ImageView(getApplicationContext());
 			if (useSmileImage)
 			{
-				coolImage.setImageResource(R.drawable.smile);
+				coolImage.setImageResource(R.drawable.smallsmile);
 			}
 			else if (useCoolImage)
 			{
-				coolImage.setImageResource(R.drawable.cool);
+				coolImage.setImageResource(R.drawable.smallcool);
 			}
 			else
 			{
-				coolImage.setImageResource(R.drawable.sad);
+				coolImage.setImageResource(R.drawable.smallsad);
 			}
 			dialogView.addView(coolImage, 0);
 			dialog.setDuration(milliseconds);
 			dialog.show();
 		}
+
 }
