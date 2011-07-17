@@ -72,7 +72,7 @@ public class NormalRankActivity extends ListActivity{
 						Log.v("rankInfo", rankInfos.get(i).getUsername());
 					
 				}else{
-					Toast.makeText(NormalRankActivity.this, R.string.failed_connect, Toast.LENGTH_LONG).show();
+					Toast.makeText(NormalRankActivity.this, R.string.failed_connect, Toast.LENGTH_SHORT).show();
 				}
 				
 			}

@@ -72,7 +72,7 @@ public class HardRankActivity extends ListActivity{
 						Log.v("rankInfo", rankInfos.get(i).getUsername());
 					
 				}else{
-					Toast.makeText(HardRankActivity.this, R.string.failed_connect, Toast.LENGTH_LONG).show();
+					Toast.makeText(HardRankActivity.this, R.string.failed_connect, Toast.LENGTH_SHORT).show();
 				}
 			}
 			

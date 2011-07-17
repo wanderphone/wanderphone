@@ -637,7 +637,7 @@ public class FightActivity extends Activity
 		Toast dialog = Toast.makeText(
 				getApplicationContext(),
 				message,
-				Toast.LENGTH_LONG);
+				Toast.LENGTH_SHORT);
 
 		dialog.setGravity(Gravity.CENTER, 0, 0);
 		LinearLayout dialogView = (LinearLayout) dialog.getView();

@@ -861,6 +861,7 @@ public class SingleActivity extends Activity {
 				}
 			}
 		}
+		showDialog(getResources().getString(R.string.win), 1000, true, false);
 		showscorediag();
 
 	}
@@ -953,16 +954,7 @@ public class SingleActivity extends Activity {
 										     // TODO Auto-generated method stub
 												//btnSmile.setBackgroundResource(R.drawable.ib_forward);
 										     }
-										 })/*.setNegativeButton(R.string.select_level_again, new DialogInterface.OnClickListener(){
-											 public void onClick(DialogInterface dialog, int which) {
-											     // TODO Auto-generated method stub
-												 Intent intent = new Intent();
-													intent.setClass(SingleActivity.this, SelectActivity.class);
-													startActivity(intent);
-													SingleActivity.this.finish();
-											     
-												 }
-											})*/.create();
+										 }).create();
 							 
 							dialog.show();
 							dialogflag=false;
@@ -970,8 +962,6 @@ public class SingleActivity extends Activity {
 							 
 						}
 					}
-				}else{
-					showDialog(getResources().getString(R.string.win), 1000, true, false);
 				}
 			}
 			
@@ -1170,7 +1160,7 @@ public class SingleActivity extends Activity {
 			boolean useSmileImage, boolean useCoolImage) {
 		// show message
 		Toast dialog = Toast.makeText(getApplicationContext(), message,
-				Toast.LENGTH_LONG);
+				Toast.LENGTH_SHORT);
 
 		dialog.setGravity(Gravity.CENTER, 0, 0);
 		LinearLayout dialogView = (LinearLayout) dialog.getView();

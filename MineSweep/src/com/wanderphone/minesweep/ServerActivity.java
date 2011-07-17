@@ -140,7 +140,7 @@ public class ServerActivity extends Activity {
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         // If the adapter is null, then Bluetooth is not supported
         if (mBluetoothAdapter == null) {
-            Toast.makeText(this, "Bluetooth is not available", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Bluetooth is not available", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -831,7 +831,7 @@ public class ServerActivity extends Activity {
 			Toast dialog = Toast.makeText(
 					getApplicationContext(),
 					changeTurn,
-					Toast.LENGTH_LONG);
+					Toast.LENGTH_SHORT);
 
 			dialog.setGravity(Gravity.CENTER, 0, 0);
 			LinearLayout dialogView = (LinearLayout) dialog.getView();
