@@ -130,7 +130,7 @@ public class SplashActivity extends Activity {
 										+ "；\n"
 										+ getResources().getString(
 												R.string.string_hard)
-										+ hardRank, Toast.LENGTH_LONG).show();
+										+ hardRank + "；", Toast.LENGTH_LONG).show();
 						Intent in = new Intent();
 						in.setClass(SplashActivity.this, MainActivity.class);
 						startActivity(in);
