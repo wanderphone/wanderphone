@@ -6,7 +6,7 @@
 	<string name="tab_search">搜索</string>
 	<string name="tab_best">经典</string>
 	<string name="tab_week">豆榜</string>
-	<string name="movie_search_hint">" 电影、导演、演员"</string>
+	<string name="movie_search_hint">电影、导演、演员</string>
 	<string name="loading">正在加载...</string>
 	<string name="view_comment">查看评论</string>
 	<string name="view_cinema">上映影院</string>

@@ -187,9 +187,9 @@ public class BestOfDoubanActivity extends BaseListActivity {
 		textview = new TextView(this);
 		textview.setText(R.string.app_refresh);
 		textview.setTextColor(0xfffff7ff);
-		textview.setTextSize(18);
+		textview.setTextSize(20);
 
-		float fDip = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 45, getResources().getDisplayMetrics());  
+		float fDip = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());  
 		int iDip = Math.round(fDip);  
 		textview.setWidth(iDip);
 		textview.setHeight(iDip);
