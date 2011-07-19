@@ -66,6 +66,7 @@ public class SingleActivity extends Activity {
 	private Boolean vibrateflag;
 	private Boolean dialogflag=true;
 	private Boolean ibflag=false;
+	private Boolean flag_dia = true;
 	private int gameflag;
 	//震动
 	static Vibrator vibrator;
@@ -861,7 +862,10 @@ public class SingleActivity extends Activity {
 				}
 			}
 		}
-		showDialog(getResources().getString(R.string.win), 1000, true, false);
+		if(flag_dia){
+			showDialog(getResources().getString(R.string.win), 1000, true, false);
+			flag_dia = false;	
+		}
 		showscorediag();
 
 	}
