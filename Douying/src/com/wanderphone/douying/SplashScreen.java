@@ -8,7 +8,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
+import com.adview.AdViewLayout;
+import com.adview.AdViewManager;
+import com.adview.AdViewTargeting;
+//import com.adview.R;
+import com.adview.AdViewTargeting.RunMode;
+import com.adview.AdViewTargeting.UpdateMode;
 import com.mobclick.android.MobclickAgent;
 
 public class SplashScreen extends Activity {
@@ -26,9 +35,21 @@ public class SplashScreen extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.splashscreen);
 
+        LinearLayout layout = (LinearLayout)findViewById(R.id.adLayout);
+        if (layout == null) 
+            return;
+        /*����}��ֻ���ڲ���,��ɺ�һ��Ҫȥ��,�ο��ĵ�˵��*/
+        AdViewManager.setConfigExpireTimeout(-1);
+        AdViewTargeting.setUpdateMode(UpdateMode.EVERYTIME); //��֤ÿ�ζ��ӷ�����ȡ����
+        AdViewTargeting.setRunMode(RunMode.NORMAL);         //��֤����ѡ�еĹ�湫˾��Ϊ����״̬ 
+      //  AdViewTargeting.setTestMode(true);
+        AdViewLayout adViewLayout = new AdViewLayout(SplashScreen.this, "SDK20110919400711zhdlaagi2x153px");
+        RelativeLayout.LayoutParams adViewLayoutParams = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+        layout.addView(adViewLayout, adViewLayoutParams);
+        layout.invalidate();
+
 		new Handler().postDelayed(new Runnable() {
 			public void run() {
-
 				Intent mainIntent = null;
 				mainIntent = new Intent(SplashScreen.this,
 						MainTabActivity.class);
@@ -36,7 +57,7 @@ public class SplashScreen extends Activity {
 				SplashScreen.this.finish();
 
 			}
-		}, 500); 
+		}, 2000); 
 	}
 
 	public void onResume() {

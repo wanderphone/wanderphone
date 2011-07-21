@@ -16,13 +16,23 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TableRow.LayoutParams;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.adview.AdViewLayout;
+import com.adview.AdViewManager;
+import com.adview.AdViewTargeting;
+import com.adview.AdViewTargeting.AdArea;
+import com.adview.AdViewTargeting.RunMode;
+import com.adview.AdViewTargeting.UpdateMode;
 import com.mobclick.android.MobclickAgent;
 import com.wanderphone.getxml.MovieSubject;
 import com.wanderphone.getxml.NetUtil;
+//import com.wanderphone.minesweep.R;
 import com.wanderphone.myAdapter.NowPlayingListAdapter;
 import com.wanderphone.sqlite.DataBaseAdapter;
 
@@ -54,7 +64,6 @@ public class NowPlayingListActivity extends BaseListActivity {
 
 		setContentView(R.layout.movie_list);
 
-		
 		if (isExists && isConnecting) {
 			addListHeaderView();
 			movies = db_adapter.loadNpData();

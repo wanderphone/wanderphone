@@ -1,5 +1,12 @@
 package com.wanderphone.douying;
 
+import com.adview.AdViewLayout;
+import com.adview.AdViewTargeting;
+import com.adview.AdViewTargeting.AdArea;
+import com.adview.AdViewTargeting.RunMode;
+import com.adview.AdViewTargeting.UpdateMode;
+//import com.wanderphone.minesweep.R;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.TableRow.LayoutParams;
 /**
  * @ClassName: MainTabActivity
  * @Description: 初始化显示的四个tab（NowPlayingListActivity，BestOfDoubanActivity，BestOfWeekActivity，SearchActivity）

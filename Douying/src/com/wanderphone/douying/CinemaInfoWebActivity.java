@@ -10,7 +10,16 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TableRow.LayoutParams;
 
+import com.adview.AdViewLayout;
+import com.adview.AdViewManager;
+import com.adview.AdViewTargeting;
+import com.adview.AdViewTargeting.AdArea;
+import com.adview.AdViewTargeting.RunMode;
+import com.adview.AdViewTargeting.UpdateMode;
 import com.mobclick.android.MobclickAgent;
 
 /**
@@ -44,6 +53,20 @@ public class CinemaInfoWebActivity extends BaseActivity {
 		Log.v("cinema_info", movieId);
 		mWebView = (WebView) findViewById(R.id.webview);
 		mWebView.setVisibility(WebView.GONE);
+		
+
+		LinearLayout layout = (LinearLayout)findViewById(R.id.adLayout);
+       // AdViewTargeting.setUpdateMode(UpdateMode.EVERYTIME); 
+        //AdViewTargeting.setRunMode(RunMode.TEST);
+		AdViewTargeting.setUpdateMode(UpdateMode.EVERYTIME);
+		AdViewTargeting.setRunMode(RunMode.TEST);
+        AdViewManager.setConfigExpireTimeout(-1);
+       // AdViewTargeting.setUpdateMode(true);
+        AdViewTargeting.setAdArea(AdArea.BOTTOM);
+        AdViewLayout adViewLayout = new AdViewLayout(this, "SDK20110919400711zhdlaagi2x153px");
+        RelativeLayout.LayoutParams adViewLayoutParams = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+        layout.addView(adViewLayout, adViewLayoutParams);
+        layout.invalidate();
 
 		WebSettings webSettings = mWebView.getSettings();
 		webSettings.setJavaScriptEnabled(true);

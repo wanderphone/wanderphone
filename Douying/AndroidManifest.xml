@@ -74,7 +74,33 @@
 			android:theme="@android:style/Theme.NoTitleBar"
 			android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation">
 		</activity>
-
+		
+<!-- AdView SDK for AdMob -->
+		<activity android:name="com.google.ads.AdActivity" 
+        android:configChanges="orientation|keyboard|keyboardHidden"/>
+    
+    	<!-- AdView SDK for millennialmedia -->
+    	<activity android:name="com.millennialmedia.android.MMAdViewOverlayActivity" />
+    	<activity android:name="com.millennialmedia.android.VideoPlayer"  />
+    	
+    	<!-- AdView SDK for Wooboo -->
+    	<meta-data android:value="1" android:name="Market_ID"/>
+    	
+    	<!-- AdView SDK for Youmi --> 
+    	<activity android:name="net.youmi.android.AdActivity"
+				  android:configChanges="keyboard|keyboardHidden|orientation"/>
+		<!-- AdView SDK for Vpon -->
+		<activity android:name="com.vpon.adon.android.WebInApp" android:screenOrientation="portrait"
+        		  android:configChanges="orientation|keyboardHidden|navigation|keyboard"/>
+        <!-- AdView SDK for AirAd -->       
+		<activity android:name="com.mt.airad.MultiAD"
+				  android:theme="@android:style/Theme.Translucent.NoTitleBar"
+				  android:configChanges="orientation|keyboard|keyboardHidden"/>	
+		<activity android:name="MMAdViewOverlayActivity"/>
 
 	</application>
+		<!-- AdView permission add -->
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
 </manifest>
