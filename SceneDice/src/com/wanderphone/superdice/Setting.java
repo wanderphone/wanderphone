@@ -1,5 +1,10 @@
 package com.wanderphone.superdice;
 
+import com.adview.AdViewLayout;
+import com.adview.AdViewTargeting;
+import com.adview.AdViewTargeting.RunMode;
+import com.adview.AdViewTargeting.UpdateMode;
+
 import android.app.AlertDialog;
 
 
@@ -19,7 +24,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 
 public class Setting extends PreferenceActivity 
@@ -49,10 +57,7 @@ public class Setting extends PreferenceActivity
 	{
 		super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.setting);
-        
-		
-       
-       
+
    }
 
 

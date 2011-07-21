@@ -3,6 +3,11 @@ package com.wanderphone.superdice;
 import java.util.HashMap;
 import java.util.List;
 
+import com.adview.AdViewLayout;
+import com.adview.AdViewTargeting;
+import com.adview.AdViewTargeting.RunMode;
+import com.adview.AdViewTargeting.UpdateMode;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -11,6 +16,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -39,7 +45,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 //主Activity
 public class SceneDice extends Activity implements SensorEventListener
@@ -130,7 +140,19 @@ public class SceneDice extends Activity implements SensorEventListener
 	    GLImage.load(this.getResources(),flag);			    		
 	    GLSurfaceView glView = new GLSurfaceView(this);
 		glView.setRenderer(render);
-		setContentView(glView);
+		LinearLayout l1=new LinearLayout(this);
+		l1.setOrientation(LinearLayout.VERTICAL); 
+		AdViewTargeting.setUpdateMode(UpdateMode.EVERYTIME); 
+        AdViewTargeting.setRunMode(RunMode.TEST);       
+        AdViewLayout adViewLayout = new AdViewLayout(this, "SDK201109193907596kewgolasc3c7uf");
+        RelativeLayout.LayoutParams adViewLayoutParams = new
+        RelativeLayout.LayoutParams(LayoutParams. FILL_PARENT, LayoutParams. WRAP_CONTENT);
+        l1.addView(adViewLayout, adViewLayoutParams); 
+        l1.invalidate();
+		//Button btn1=new Button(this);  
+		//l1.addView(btn1);
+		l1.addView(glView);
+		setContentView(l1);
 		
 		
 		//震动
@@ -150,7 +172,14 @@ public class SceneDice extends Activity implements SensorEventListener
 
 
 	
-
+    public void onConfigurationChanged(Configuration newConfig) { 
+           super.onConfigurationChanged(newConfig); 
+           if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) { 
+                   // land do nothing is ok 
+           } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) { 
+                   // port do nothing is ok 
+           } 
+   }
 
 	//menu菜单
 	public boolean onCreateOptionsMenu(Menu menu) 

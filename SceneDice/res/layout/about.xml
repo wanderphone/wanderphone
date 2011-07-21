@@ -54,4 +54,7 @@
     android:textSize="17sp"
     android:text="@string/string70"
     />
+
 </LinearLayout>
+
+

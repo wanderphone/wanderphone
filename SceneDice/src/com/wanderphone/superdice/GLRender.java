@@ -11,6 +11,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 import com.wanderphone.superdice.Start.IndexThread;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.hardware.Sensor;
@@ -31,6 +32,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.MotionEvent;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 //openGL构建模型
 public class GLRender implements Renderer,SensorEventListener
 
@@ -299,7 +301,8 @@ public class GLRender implements Renderer,SensorEventListener
 		activityflag=tmpflag;
 		//final IndexThread thread = new IndexThread();
        
-     //  thread.start();
+       //  thread.start();
+		
 		
 	
 	}
@@ -633,7 +636,7 @@ public class GLRender implements Renderer,SensorEventListener
                 //��ÿ�εĻζ������ӣ��õ�����ζ����                
                 totalShake += shake;                
                 // �ж��Ƿ�Ϊҡ��
-                if (totalShake > 30) {
+                if (totalShake > 40) {
                 	 
                   dicerock();
                   //SceneDice.play(123,0);
