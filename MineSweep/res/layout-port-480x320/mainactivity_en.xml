@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/ll"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:background="@drawable/bk_port">
+	
+	<ImageButton 
+		android:id="@+id/bt_single" 
+		android:layout_width="160dip"
+		android:layout_height="35dip" 
+		android:layout_gravity="right"
+		android:layout_marginTop="160dip" 
+		android:layout_marginRight="15dip" 
+		android:background="@drawable/single_button_en"/>
+	<ImageButton 
+		android:id="@+id/bt_multiple" 
+		android:layout_width="160dip"
+		android:layout_height="35dip" 
+		android:layout_gravity="right"
+		android:layout_marginTop="8dip" 
+		android:layout_marginRight="15dip" 
+		android:background="@drawable/multi_button_en"/>
+	<ImageButton 
+		android:id="@+id/bt_rank" 
+		android:layout_width="160dip"
+		android:layout_height="35dip" 
+		android:layout_gravity="right"
+		android:layout_marginTop="8dip" 
+		android:layout_marginRight="15dip" 
+		android:background="@drawable/rank_button_en"/>
+	<ImageButton 
+		android:id="@+id/bt_set" 
+		android:layout_width="160dip"
+		android:layout_height="35dip" 
+		android:layout_gravity="right"
+		android:layout_marginTop="8dip" 
+		android:layout_marginRight="15dip"  
+	    android:background="@drawable/set_button_en"/>
+	<ImageButton 
+		android:id="@+id/bt_help" 
+		android:layout_width="160dip"
+		android:layout_height="35dip" 
+		android:layout_gravity="right"
+		android:layout_marginTop="8dip" 
+		android:layout_marginRight="15dip"  
+		android:background="@drawable/help_button_en"/>
+	<ImageButton 
+		android:id="@+id/bt_about" 
+		android:layout_width="160dip"
+		android:layout_height="35dip" 
+		android:layout_gravity="right"
+		android:layout_marginTop="8dip" 
+		android:layout_marginRight="15dip"  
+		android:background="@drawable/about_button_en"/>
+	<LinearLayout
+    android:id="@+id/adLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+   />
+</LinearLayout>
+

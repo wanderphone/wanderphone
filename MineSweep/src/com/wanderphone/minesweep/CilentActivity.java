@@ -2,6 +2,11 @@ package com.wanderphone.minesweep;
 
 import java.util.Random;
 
+import com.adview.AdViewLayout;
+import com.adview.AdViewTargeting;
+import com.adview.AdViewTargeting.AdArea;
+import com.adview.AdViewTargeting.RunMode;
+import com.adview.AdViewTargeting.UpdateMode;
 import com.mobclick.android.MobclickAgent;
 
 //import com.minesweep.R;
@@ -33,6 +38,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -105,6 +111,17 @@ public class CilentActivity extends Activity {
 		setContentView(R.layout.cilentactivity);
 		DisplayMetrics metrics =new DisplayMetrics(); 
 		getWindowManager().getDefaultDisplay().getMetrics(metrics); 
+		
+		LinearLayout layout = (LinearLayout)findViewById(R.id.adLayout);
+        AdViewTargeting.setUpdateMode(UpdateMode.EVERYTIME); 
+        AdViewTargeting.setRunMode(RunMode.NORMAL);         
+      //  AdViewManager.setConfigExpireTimeout(-1);
+     //   AdViewTargeting.setUpdateMode(true);
+        AdViewTargeting.setAdArea(AdArea.BOTTOM);
+        AdViewLayout adViewLayout = new AdViewLayout(this, "SDK20110919390740btotf179h73quve");
+        RelativeLayout.LayoutParams adViewLayoutParams = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+        layout.addView(adViewLayout, adViewLayoutParams);
+        layout.invalidate();
 		int width=metrics.widthPixels;
 		int height=metrics.heightPixels;
 		

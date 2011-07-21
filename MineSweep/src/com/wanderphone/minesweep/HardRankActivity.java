@@ -9,10 +9,18 @@ import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 //import com.minesweep.R;
+import com.adview.AdViewLayout;
+import com.adview.AdViewTargeting;
+import com.adview.AdViewTargeting.AdArea;
+import com.adview.AdViewTargeting.RunMode;
+import com.adview.AdViewTargeting.UpdateMode;
 import com.mobclick.android.MobclickAgent;
 import com.wanderphone.minesweep.listAdapter.RankListAdapter;
 import com.wanderphone.minesweep.xmlparse.HttpClientConnector;

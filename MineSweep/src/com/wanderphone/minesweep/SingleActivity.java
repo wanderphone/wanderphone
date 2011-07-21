@@ -2,6 +2,7 @@ package com.wanderphone.minesweep;
 
 import java.util.HashMap;
 
+import java.util.Locale;
 import java.util.Random;
 import java.util.UUID;
 
@@ -111,6 +112,7 @@ public class SingleActivity extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		MobclickAgent.onError(this);
+		
 
 		setContentView(R.layout.singleactivity);
 		
@@ -170,7 +172,18 @@ public class SingleActivity extends Activity {
 		bt_easy = (ImageButton)findViewById(R.id.easy);
 		bt_normal = (ImageButton)findViewById(R.id.normal);
 		bt_hard = (ImageButton)findViewById(R.id.hard);
-
+		String string1=getLocaleLanguage();
+		if(string1.equals("zh-CN")||string1.equals("zh-TW"))
+        {
+			
+        }
+        else
+        {
+        	bt_easy.setBackgroundResource(R.drawable.easy_button_en);
+        	bt_normal.setBackgroundResource(R.drawable.normal_button_en);
+        	bt_hard.setBackgroundResource(R.drawable.hard_button_en);
+        }
+		
 		// set font style for timer and mine count to LCD style
 		Typeface lcdFont = Typeface.createFromAsset(getAssets(),
 				"fonts/lcd2mono.ttf");
@@ -1240,7 +1253,10 @@ public class SingleActivity extends Activity {
 		}
 		
 	}
-
+	public String getLocaleLanguage() {
+		Locale l = Locale.getDefault();
+		return String.format("%s-%s", l.getLanguage(), l.getCountry());
+		}
 	// Activity暂停时关闭数据库操作
 	protected void onPause() {
 		// TODO Auto-generated method stub

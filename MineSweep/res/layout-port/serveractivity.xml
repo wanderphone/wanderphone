@@ -16,7 +16,12 @@
     android:textColor="#CD2626"
     android:textSize="50sp"
     />
-
+ <LinearLayout
+    android:id="@+id/adLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_above="@id/server_bt1"
+   />
 <Button
 	android:id="@+id/server_bt1"
 	android:layout_width="150dip"

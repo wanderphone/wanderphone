@@ -47,4 +47,12 @@
 	android:textColor="#7D26CD"
 	android:background="@drawable/back_button"
 	/>
+    
+     <LinearLayout
+    android:id="@+id/adLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="15dip"
+   />
+
 </LinearLayout>    

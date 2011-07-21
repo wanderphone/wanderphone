@@ -2,6 +2,13 @@ package com.wanderphone.minesweep;
 
 //import com.minesweep.R;
 
+import java.util.Locale;
+
+import com.adview.AdViewLayout;
+import com.adview.AdViewManager;
+import com.adview.AdViewTargeting;
+import com.adview.AdViewTargeting.RunMode;
+import com.adview.AdViewTargeting.UpdateMode;
 import com.mobclick.android.MobclickAgent;
 
 import android.app.Activity;
@@ -16,7 +23,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 public class MainActivity extends Activity {
 	/** Called when the activity is first created. */
@@ -38,11 +48,28 @@ public class MainActivity extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		MobclickAgent.onError(this);
-
-		setContentView(R.layout.mainactivity);
+		String string1=getLocaleLanguage();
+		if(string1.equals("zh-CN")||string1.equals("zh-TW"))
+        {
+			setContentView(R.layout.mainactivity);
+			
+        }
+        else
+        {
+        	setContentView(R.layout.mainactivity_en);
+        }
 		
+		LinearLayout layout = (LinearLayout)findViewById(R.id.adLayout);
 		findView();	
 		setListeners();
+		
+        AdViewTargeting.setUpdateMode(UpdateMode.EVERYTIME); 
+        AdViewTargeting.setRunMode(RunMode.NORMAL);         
+
+        AdViewLayout adViewLayout = new AdViewLayout(this, "SDK20110919390740btotf179h73quve");
+        RelativeLayout.LayoutParams adViewLayoutParams = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+        layout.addView(adViewLayout, adViewLayoutParams);
+        layout.invalidate();
 
 	}
 	//控件初始化	
@@ -209,6 +236,10 @@ public class MainActivity extends Activity {
                 // port do nothing is ok 
         } 
 }
+	public String getLocaleLanguage() {
+		Locale l = Locale.getDefault();
+		return String.format("%s-%s", l.getLanguage(), l.getCountry());
+		}
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub

@@ -52,5 +52,9 @@
 		android:layout_marginTop="8dip" 
 		android:layout_marginRight="15dip"  
 		android:background="@drawable/about_button"/>
-	
+	<LinearLayout
+    android:id="@+id/adLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+   />
 </LinearLayout>

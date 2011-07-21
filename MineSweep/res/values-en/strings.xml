@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">MineSweeper</string>
+	<string name="bt_start">Play</string>
+	<string name="bt_show">Discoverable</string>
+	<string name="bt_connect">Connect</string>
+	<string name="sounds_on">Sounds：On</string>
+	<string name="select_level">请选择难度</string>
+	<string name="select_easy">Easy</string>
+	<string name="select_normal">Normal</string>
+	<string name="select_hard">Hard</string>
+	<string name="sounds_off">Sounds：Off</string>
+	<string name="play_with_human">Multiplayer</string>
+	<string name="server">Server</string>
+	<string name="client">Client</string>
+	<string name="server_back">Back</string>
+	<string name="ranking_tv">Ranking Top</string>
+	<string name="help_title">Singleplayer Rules</string>
+	<string name="help_title_two">Multiplayer Rules</string>
+	<string name="help_content">
+		* Aim of the game is to locate all mines as quickly
+		as possible without uncovering any of mine. If you uncover a mine, you
+		will lose.\n\n
+		* You can uncover a square by tapping it. If you uncover
+		a mine, you will lose.\n\n
+		* If there is a number on a square, it means
+		how many mines are in the eight squares surrounding the number. \n\n
+		*
+		If you think a square is a mine, please long tap it.\n\n
+		* There are
+		two modes to play game. One gives player to uncover a mine, the other
+		gives player to mark a flag. \n\n
+		* Tap any square of playing field can
+		start the timer.\n\n
+		* Tap the smile icon to restart the game.
+		
+    </string>
+	<string name="help_content_two">
+		*Aim of Multiplayer game is to find mine. If you mark a mine, you can mark
+		again. If there is not a mine, the square will open, so it will turn
+		to other player. \n\n
+		*How to win the game：To mark TWENTY-ONE mines。 \n\n						
+    </string>
+	<string name="bt_sure">Sure</string>
+	<string name="about_title">About us</string>
+	<string name="about_detail">如果您在使用中遇到任何疑问或者问题，欢迎与我们联系，期待您的参与！</string>
+	<string name="connect_us">联系我们</string>
+	<string name="email">Email:app@androidcorn.com</string>
+	<string name="main_page">Official Website：</string>
+	<string name="waiting">waiting...</string>
+	<string name="no_connect">No Connect</string>
+	<string name="connecting">Connecting</string>
+	<string name="connected">Connected:</string>
+	<!-- DeviceListActivity -->
+	<string name="scanning">scanning for devices...</string>
+	<string name="select_device">select a device to connect</string>
+	<string name="none_paired">No devices have been paired</string>
+	<string name="none_found">No devices found</string>
+	<string name="title_paired_devices">Paired Devices</string>
+	<string name="title_other_devices">Other Available Devices</string>
+	<string name="button_scan">Scan for devices</string>
+	<string name="bt_not_enabled_leaving">Bluetooth was not enabled. Leaving Bluetooth Chat.
+	</string>
+	<string name="dialog_title">"Important"</string>
+	<string name="username_prompt">"First time to play, please enter a name."</string>
+	<string name="prompt">"提示"</string>
+	<string name="register_success">"Success"</string>
+	<string name="loading">Loading...</string>
+	<string name="about">About us</string>
+	<string name="intro">简介</string>
+	<string name="version">版本号：0.10</string>
+	<string name="designTitle">开发：</string>
+	<string name="teamName">豌豆风</string>
+	<string name="informationTitle">更多信息：</string>
+	<string name="informationWeb">http://www.wanderphone.com</string>
+	<string name="questionTitle">问题反馈：</string>
+	<string name="questionEmail">service@wanderphone.com</string>
+	<string name="attentionTitle">关注我们：</string>
+	<string name="sinaBlog">新浪微博：豌豆风</string>
+	<string name="qqBlog">腾讯微博：豌豆风</string>
+	<string name="developmentTitle">Development：</string>
+	<string name="teamEnglishName">Wanderphone Team</string>
+	<string name="moreInformationTitle">More Information：</string>
+	<string name="feedBack">Feedback：</string>
+	<string name="websit">http://mineswipe.wanderphone.com/</string>
+	<string name="go_on_game">Continue</string>
+	<string name="change_turn">Your turn......</string>
+	<string name="wait_other">Wating to play......</string>
+	<string name="win">Congratulations！</string>
+	<string name="lose">You lose！</string>
+	<string name="failed_connect">Loading failed</string>
+	<string name="loading_rank">Loading...</string>
+	<string name="bt_cancel">Cancel</string>
+	<string name="dialog_sure_quit">Do you really wish to leave game?</string>
+	<string name="sound_on">Sounds: ON</string>
+	<string name="sound_off">Sounds: OFF</string>
+	<string name="vibrate_on">Vibrate: ON</string>
+	<string name="vibrate_off">Vibrate: OFF</string>
+	<string name="set">Setting</string>
+	<string name="set_share">Share</string>
+	<string name="set_feedback">Feedback</string>
+	<string name="set_sound">Sounds</string>
+	<string name="set_vibrate">Vibrate</string>
+	<string name="set_share_content">share MineSweeper to your friends</string>
+	<string name="set_feedback_content">please feedback your idea to help us promote
+		MineSweeper</string>
+	<string name="set_sound_content">tap mine</string>
+	<string name="set_vibrate_content">tap mine</string>
+	<string name="share">Share</string>
+	<string name="share_content">There is a MineSweep app in www.wanderphone.com
+	</string>
+	<string name="string_no_play">you have not played yet.</string>
+	<string name="string_rank_prompt">Your score in the world：</string>
+	<string name="string_easy">"Easy:     "</string>
+	<string name="string_normal">"Normal: "</string>
+	<string name="string_hard">"Hard:     "</string>
+	<string name="string_this_score">"Your score is "</string>
+	<string name="string_best_score">"Your best score is "</string>
+	<string name="string_all_country">"s; In the world's rank is "</string>
+	<string name="sp_n">" "</string>
+	<string name="sp_m">" "</string>
+</resources>

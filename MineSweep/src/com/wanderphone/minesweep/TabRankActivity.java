@@ -2,6 +2,11 @@ package com.wanderphone.minesweep;
 
 //import com.minesweep.R;
 
+import com.adview.AdViewLayout;
+import com.adview.AdViewTargeting;
+import com.adview.AdViewTargeting.AdArea;
+import com.adview.AdViewTargeting.RunMode;
+import com.adview.AdViewTargeting.UpdateMode;
 import com.mobclick.android.MobclickAgent;
 
 import android.app.TabActivity;
@@ -15,6 +20,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -60,7 +68,7 @@ public class TabRankActivity extends TabActivity {
 				}
 				return false;
 			}
-		}; 			
+		};
     }
     class MyGestureDetector extends SimpleOnGestureListener {
 		@Override
